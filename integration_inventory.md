@@ -4,7 +4,26 @@
 
 | Система/поставщик | Назначение/контекст | Контактное лицо (имя/роль) | Канал связи | SLA/ограничения | Комментарии |
 | --- | --- | --- | --- | --- | --- |
-| _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
+| SendGrid (email) | Отправка системных писем и уведомлений. | _TBD_ | _TBD_ | _TBD_ | SMTP/API. |
+| Twilio (SMS) | Отправка SMS и двухфакторной аутентификации. | _TBD_ | _TBD_ | _TBD_ | SMS/Verify API. |
+| Firebase Cloud Messaging | Push-уведомления мобильным клиентам. | _TBD_ | _TBD_ | _TBD_ | FCM токены. |
+| Okta SSO | SSO для корпоративных пользователей. | _TBD_ | _TBD_ | _TBD_ | SAML/OIDC. |
+| Azure AD | Каталог пользователей и групп. | _TBD_ | _TBD_ | _TBD_ | SCIM/Graph API. |
+| Google Calendar | Планирование задач и напоминания. | _TBD_ | _TBD_ | _TBD_ | OAuth2. |
+| Microsoft 365 Calendar | Планирование встреч и напоминаний. | _TBD_ | _TBD_ | _TBD_ | Graph API. |
+| Amazon S3 | Хранилище файлов и экспортов. | _TBD_ | _TBD_ | _TBD_ | Объектное хранилище. |
+| Google Drive | Обмен отчетами и файлами. | _TBD_ | _TBD_ | _TBD_ | OAuth2. |
+| SharePoint | Внутренний документооборот. | _TBD_ | _TBD_ | _TBD_ | Graph API. |
+| Slack | Уведомления и боты. | _TBD_ | _TBD_ | _TBD_ | Webhooks/Apps. |
+| Microsoft Teams | Уведомления в рабочих каналах. | _TBD_ | _TBD_ | _TBD_ | Webhooks/Apps. |
+| Zoom | Онлайн-встречи по задачам/проектам. | _TBD_ | _TBD_ | _TBD_ | OAuth2/API. |
+| Power BI | Аналитические дашборды. | _TBD_ | _TBD_ | _TBD_ | Dataset refresh. |
+| Amplitude | Продуктовая аналитика. | _TBD_ | _TBD_ | _TBD_ | Event tracking. |
+| Datadog | Мониторинг инфраструктуры и метрик. | _TBD_ | _TBD_ | _TBD_ | Metrics/Logs. |
+| Sentry | Трекинг ошибок и алерты. | _TBD_ | _TBD_ | _TBD_ | Error events. |
+| Jira | Управление задачами и инцидентами. | _TBD_ | _TBD_ | _TBD_ | REST API. |
+| Salesforce | Интеграция с CRM. | _TBD_ | _TBD_ | _TBD_ | REST/Bulk API. |
+| Zapier/Make | Низкодовые автоматизации. | _TBD_ | _TBD_ | _TBD_ | Webhooks/Triggers. |
 
 ## 2) Внутренние команды/сервисы и интеграции
 
