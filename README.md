@@ -86,7 +86,13 @@
 - **Результат** — ожидаемый выход/эффект, статус выполнения и артефакты.
   - Примеры: созданная задача, отправленное уведомление, запись в журнал.
 
-## 2. Единый формат хранения макросов (JSON-шаблон)
+## 2. Единый формат хранения макросов (JSON) и схема валидации
+
+**Выбран формат хранения:** JSON (канонический).  
+**Схема валидации:** JSON Schema Draft 2020-12 (`docs/macro_schema.json`).
+
+Для удобства авторинга допускается YAML, но перед сохранением в хранилище он должен быть
+приведен к JSON и валидирован по схеме.
 
 ```json
 {
@@ -94,19 +100,33 @@
   "name": "string",
   "version": "1.0",
   "description": "string",
+  "parameters": {
+    "param_name": {
+      "type": "string|number|boolean|array|object",
+      "default": "value",
+      "required": false,
+      "description": "string"
+    }
+  },
   "trigger": {
     "type": "string",
-    "params": {}
+    "params": {
+      "use_parameters": true
+    }
   },
   "steps": [
     {
       "id": "string",
       "type": "string",
-      "params": {},
+      "params": {
+        "use_parameters": true
+      },
       "conditions": [
         {
           "type": "string",
-          "params": {}
+          "params": {
+            "use_parameters": true
+          }
         }
       ],
       "on_error": {
@@ -119,7 +139,9 @@
   "conditions": [
     {
       "type": "string",
-      "params": {}
+      "params": {
+        "use_parameters": true
+      }
     }
   ],
   "errors": {
@@ -140,9 +162,9 @@
 }
 ```
 
-## 3. Базовые макросы (5–10 популярных сценариев)
+## 3. Базовые макросы (10–20 популярных сценариев)
 
-Ниже — 8 базовых макросов в предложенном JSON-формате (сокращённо, без служебных полей).
+Ниже — 12 базовых макросов в предложенном JSON-формате (сокращённо, без служебных полей).
 
 ### 3.1. Автоответ на входящее письмо
 ```json
@@ -264,7 +286,85 @@
 }
 ```
 
-## 4. Рекомендации по автоматическому подбору макросов
+### 3.9. Доставка отчета по расписанию
+```json
+{
+  "id": "macro-report-delivery",
+  "name": "Отчет по расписанию",
+  "trigger": {"type": "schedule", "params": {"cron": "0 9 * * 1"}},
+  "steps": [
+    {"id": "run-report", "type": "run_report", "params": {"template": "weekly"}},
+    {"id": "notify", "type": "notify", "params": {"channel": "email", "template": "report_ready"}}
+  ],
+  "conditions": [{"type": "timezone_in", "params": {"values": ["Europe/Moscow"]}}],
+  "errors": {"default_strategy": "retry", "notify": ["email"], "log_level": "warn"},
+  "result": {"status": "success"}
+}
+```
+
+### 3.10. Дедупликация лидов
+```json
+{
+  "id": "macro-lead-dedup",
+  "name": "Дедупликация лидов",
+  "trigger": {"type": "lead_created", "params": {"source": "forms"}},
+  "steps": [
+    {"id": "find-duplicates", "type": "find_duplicates", "params": {"key": "email"}},
+    {"id": "merge", "type": "merge_leads", "params": {"strategy": "latest"}}
+  ],
+  "conditions": [{"type": "duplicates_found", "params": {"min_count": 1}}],
+  "errors": {"default_strategy": "skip", "notify": ["slack"], "log_level": "warn"},
+  "result": {"status": "success"}
+}
+```
+
+### 3.11. Продление подписки
+```json
+{
+  "id": "macro-renewal-reminder",
+  "name": "Напоминание о продлении",
+  "trigger": {"type": "subscription_expiring", "params": {"days_before": 7}},
+  "steps": [
+    {"id": "notify", "type": "notify", "params": {"channel": "email", "template": "renewal_notice"}}
+  ],
+  "conditions": [{"type": "plan_in", "params": {"values": ["pro", "enterprise"]}}],
+  "errors": {"default_strategy": "retry", "notify": ["email"], "log_level": "warn"},
+  "result": {"status": "success"}
+}
+```
+
+### 3.12. Контроль возвратов
+```json
+{
+  "id": "macro-refund-approval",
+  "name": "Согласование возврата",
+  "trigger": {"type": "refund_requested", "params": {"channel": "web"}},
+  "steps": [
+    {"id": "check", "type": "fraud_check", "params": {"threshold": 0.7}},
+    {"id": "approve", "type": "approve_refund", "params": {"strategy": "manager"}}
+  ],
+  "conditions": [{"type": "amount_lt", "params": {"value": 1000}}],
+  "errors": {"default_strategy": "fallback", "notify": ["slack"], "log_level": "error"},
+  "result": {"status": "success"}
+}
+```
+
+## 4. Параметризация (что пользователь меняет без кода)
+
+Пользователь настраивает макросы через блок `parameters` и подстановку значений в `trigger/steps/conditions`.
+
+**Типовые параметры:**
+- Каналы и получатели уведомлений (`email`, `slack`, `webhook`).
+- Шаблоны сообщений и отчётов (`template`).
+- Тайминги и расписания (`cron`, `days_before`, `duration`).
+- Фильтры и сегменты (`queue`, `plan_in`, `tag_contains`).
+- Политики ошибок (`default_strategy`, `retries`, `notify`).
+- Метаданные для поиска (`tags`, `owner`, `priority`).
+
+**Правило:** любые настройки, не требующие кода, должны быть выражены параметрами, а не
+зашиты в типы шагов.
+
+## 5. Рекомендации по автоматическому подбору макросов
 
 - **Классифицируйте входящие события** по типам (почта, тикеты, CRM, биллинг), чтобы быстро сузить набор подходящих макросов.
 - **Используйте веса и теги**: каждому макросу задайте теги и приоритеты. Ранжирование по совпадению тегов и истории успешных срабатываний.
@@ -272,7 +372,7 @@
 - **Добавьте «обучение от выбора»**: сохраняйте, какие макросы выбирают сотрудники, и постепенно поднимайте их рейтинг.
 - **Фильтруйте по условиям**: сначала отсекайте несовместимые макросы (условия), затем выбирайте лучший по скору.
 
-## 5. Метрики качества макроса
+## 6. Метрики качества макроса
 
 - **Время настройки**
   - Среднее время от создания до первого успешного запуска (минуты/часы).
@@ -287,6 +387,16 @@
 - **Полезность**
   - Частота использования макроса.
   - Оценка пользователей (CSAT/внутренние оценки).
+
+## 7. Инструкции по применению и настройке
+
+1. **Выберите макрос** из списка или каталога макросов и скопируйте JSON-шаблон.
+2. **Заполните `parameters`** (значения без кода: каналы, фильтры, расписания).
+3. **Подставьте параметры** в `trigger/steps/conditions` через `params`.
+4. **Проверьте схему**: валидируйте JSON по `docs/macro_schema.json`.
+5. **Зарегистрируйте макрос** в хранилище (например, `macros/` или БД).
+6. **Запустите тестовый прогон** (dry-run) и проверьте логи `errors`/`result`.
+7. **Включите мониторинг** успешности и обновляйте параметры по метрикам.
 ## Карты бизнес‑сценариев
 
 Ниже представлены 10 ключевых бизнес‑сценариев с типовыми pipeline, привязкой функций/приложений и запасными ветками.
