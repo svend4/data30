@@ -55,6 +55,21 @@
 | 49 | `health_check` | Возвращает статус сервисов. | `scope` | `status`, `services[]` |
 | 50 | `get_system_metrics` | Возвращает системные метрики. | `from`, `to`, `metrics[]` | `series[]` |
 
+## Дополнительные функции для отзывов и подтверждений
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 1 | `create_verified_usage` | Создает/обновляет запись подтвержденного использования. | `user_id`, `product_id`, `scenario_id`, `source`, `usage_count`, `verified_at`, `expires_at` | `verified_usage_id`, `status` |
+| 2 | `get_verified_usage` | Возвращает подтверждение по пользователю и сценарию. | `user_id`, `product_id`, `scenario_id` | `verified_usage` |
+| 3 | `create_review` | Создает отзыв, если есть активное подтверждение. | `user_id`, `product_id`, `scenario_id`, `quality_score`, `utility_score`, `comment` | `review_id`, `status` |
+| 4 | `list_reviews` | Возвращает отзывы с фильтрами. | `filters`, `page`, `page_size` | `items[]`, `total` |
+| 5 | `create_verification_audit` | Записывает аудит подтверждения использования. | `verified_usage_id`, `actor_id`, `action`, `reason` | `audit_id`, `created_at` |
+
+### Валидация `create_review`
+- Проверить наличие `verified_usage` по `(user_id, product_id, scenario_id)`.
+- Проверить `expires_at` ≥ текущая дата.
+- В случае отсутствия подтверждения вернуть ошибку `usage_verification_required`.
+
 ## 20 типовых сценариев использования
 
 | № | Цель | Шаги | Ожидаемый результат |
