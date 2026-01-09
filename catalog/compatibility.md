@@ -32,3 +32,38 @@
 | SharePoint | microsoft-teams, outlook |
 | Kubernetes | gitlab, github |
 | Google Analytics | shopify, google-drive |
+
+## Карта зависимостей
+
+Источник данных — поле `dependencies` в `apps.yaml`.
+
+| Приложение | Зависимости |
+| --- | --- |
+| Slack | — |
+| Microsoft Teams | microsoft-365 |
+| Zoom | — |
+| Google Meet | google-workspace |
+| Jira Software | atlassian-cloud |
+| Trello | atlassian-cloud |
+| Asana | — |
+| Notion | — |
+| Confluence | atlassian-cloud |
+| GitHub | — |
+| GitLab | — |
+| Bitbucket | atlassian-cloud |
+| Figma | — |
+| Miro | — |
+| Salesforce | — |
+| HubSpot | — |
+| Zendesk | — |
+| Intercom | — |
+| Stripe | — |
+| Shopify | — |
+| Mailchimp | — |
+| Google Drive | google-workspace |
+| Gmail | google-workspace |
+| Google Calendar | google-workspace |
+| Microsoft Outlook | microsoft-365 |
+| SharePoint | microsoft-365 |
+| Kubernetes | container-runtime |
+| Google Analytics | google-workspace |
