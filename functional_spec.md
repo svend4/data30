@@ -1,5 +1,15 @@
 # Перечень функций, сценариев и макросов
 
+## Определения
+
+- **Функция** — атомарная бизнес-операция системы, выполняемая через API/интерфейс и имеющая четко описанные входы и выходы (например, `create_task`, `assign_role`).
+- **Сценарий** — последовательность действий пользователя/системы, объединяющая несколько функций для достижения конкретной цели (например, «создать проект и первую задачу»).
+- **Макрос** — заранее заданная автоматизация (шаблон сценария), которая объединяет функции в повторяемый поток с минимальным участием пользователя.
+- **Приложение** — внутренний модуль с UI или внешняя система/сервис, с которым предусмотрена интеграция (например, почтовый сервис, мессенджер, BI).
+
+## Перечень 50 функций (сгруппировано по темам)
+
+### Пользователи и доступ
 ## Перечень 58 функций
 ## Перечень 61 функций
 
@@ -10,47 +20,87 @@
 | 3 | `deactivate_user` | Блокирует пользователя без удаления данных. | `user_id`, `reason` | `user_id`, `status` |
 | 4 | `list_users` | Возвращает список пользователей с фильтрами. | `filters`, `page`, `page_size` | `items[]`, `total` |
 | 5 | `get_user` | Получает подробную карточку пользователя. | `user_id` | `user` |
-| 6 | `create_project` | Создает проект для команды. | `name`, `owner_id`, `tags[]` | `project_id`, `created_at` |
-| 7 | `update_project` | Обновляет параметры проекта. | `project_id`, `name`, `status` | `project_id`, `updated_at` |
-| 8 | `archive_project` | Архивирует проект без удаления. | `project_id`, `reason` | `project_id`, `archived_at` |
-| 9 | `list_projects` | Возвращает список проектов. | `filters`, `page`, `page_size` | `items[]`, `total` |
-| 10 | `get_project` | Возвращает карточку проекта. | `project_id` | `project` |
-| 11 | `create_task` | Создает задачу в проекте. | `project_id`, `title`, `assignee_id`, `due_date` | `task_id`, `created_at` |
-| 12 | `update_task` | Обновляет данные задачи. | `task_id`, `fields{}` | `task_id`, `updated_at` |
-| 13 | `complete_task` | Отмечает задачу выполненной. | `task_id`, `completed_by` | `task_id`, `completed_at` |
-| 14 | `reopen_task` | Возвращает задачу в работу. | `task_id`, `reason` | `task_id`, `status` |
-| 15 | `list_tasks` | Возвращает задачи с фильтрами. | `project_id`, `filters`, `page` | `items[]`, `total` |
-| 16 | `get_task` | Возвращает подробности задачи. | `task_id` | `task` |
-| 17 | `add_comment` | Добавляет комментарий к объекту. | `entity_type`, `entity_id`, `author_id`, `text` | `comment_id`, `created_at` |
-| 18 | `list_comments` | Возвращает комментарии объекта. | `entity_type`, `entity_id`, `page` | `items[]`, `total` |
-| 19 | `upload_file` | Загружает файл и сохраняет метаданные. | `file`, `owner_id`, `tags[]` | `file_id`, `url` |
-| 20 | `get_file` | Возвращает метаданные файла. | `file_id` | `file` |
-| 21 | `delete_file` | Удаляет файл с хранением истории. | `file_id`, `reason` | `file_id`, `status` |
-| 22 | `create_tag` | Создает тег для классификации. | `name`, `color` | `tag_id` |
-| 23 | `list_tags` | Возвращает список тегов. | `filters` | `items[]` |
-| 24 | `assign_tag` | Назначает тег объекту. | `entity_type`, `entity_id`, `tag_id` | `entity_id`, `tag_id` |
-| 25 | `remove_tag` | Снимает тег с объекта. | `entity_type`, `entity_id`, `tag_id` | `entity_id`, `tag_id` |
-| 26 | `create_notification` | Создает уведомление пользователю. | `user_id`, `title`, `body`, `channel` | `notification_id` |
-| 27 | `list_notifications` | Возвращает уведомления пользователя. | `user_id`, `status`, `page` | `items[]`, `total` |
-| 28 | `mark_notification_read` | Помечает уведомление прочитанным. | `notification_id` | `notification_id`, `read_at` |
-| 29 | `create_webhook` | Создает вебхук на событие. | `event`, `target_url`, `secret` | `webhook_id` |
-| 30 | `list_webhooks` | Возвращает список вебхуков. | `filters` | `items[]` |
-| 31 | `delete_webhook` | Удаляет вебхук. | `webhook_id` | `webhook_id`, `status` |
-| 32 | `create_audit_entry` | Записывает событие аудита. | `actor_id`, `action`, `entity` | `audit_id`, `created_at` |
-| 33 | `list_audit_entries` | Возвращает аудит с фильтрами. | `filters`, `page` | `items[]`, `total` |
-| 34 | `create_team` | Создает команду. | `name`, `owner_id` | `team_id` |
-| 35 | `update_team` | Обновляет параметры команды. | `team_id`, `fields{}` | `team_id`, `updated_at` |
-| 36 | `add_team_member` | Добавляет пользователя в команду. | `team_id`, `user_id`, `role` | `team_id`, `user_id` |
-| 37 | `remove_team_member` | Удаляет пользователя из команды. | `team_id`, `user_id` | `team_id`, `user_id` |
-| 38 | `list_team_members` | Возвращает участников команды. | `team_id`, `page` | `items[]`, `total` |
-| 39 | `create_role` | Создает роль доступа. | `name`, `permissions[]` | `role_id` |
-| 40 | `assign_role` | Назначает роль пользователю. | `user_id`, `role_id` | `user_id`, `role_id` |
-| 41 | `list_roles` | Возвращает роли. | `filters` | `items[]` |
-| 42 | `create_permission` | Создает разрешение. | `name`, `scope` | `permission_id` |
-| 43 | `list_permissions` | Возвращает перечень разрешений. | `filters` | `items[]` |
+| 6 | `create_role` | Создает роль доступа. | `name`, `permissions[]` | `role_id` |
+| 7 | `assign_role` | Назначает роль пользователю. | `user_id`, `role_id` | `user_id`, `role_id` |
+| 8 | `list_roles` | Возвращает роли. | `filters` | `items[]` |
+| 9 | `create_permission` | Создает разрешение. | `name`, `scope` | `permission_id` |
+| 10 | `list_permissions` | Возвращает перечень разрешений. | `filters` | `items[]` |
+
+### Команды
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 11 | `create_team` | Создает команду. | `name`, `owner_id` | `team_id` |
+| 12 | `update_team` | Обновляет параметры команды. | `team_id`, `fields{}` | `team_id`, `updated_at` |
+| 13 | `add_team_member` | Добавляет пользователя в команду. | `team_id`, `user_id`, `role` | `team_id`, `user_id` |
+| 14 | `remove_team_member` | Удаляет пользователя из команды. | `team_id`, `user_id` | `team_id`, `user_id` |
+| 15 | `list_team_members` | Возвращает участников команды. | `team_id`, `page` | `items[]`, `total` |
+
+### Проекты
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 16 | `create_project` | Создает проект для команды. | `name`, `owner_id`, `tags[]` | `project_id`, `created_at` |
+| 17 | `update_project` | Обновляет параметры проекта. | `project_id`, `name`, `status` | `project_id`, `updated_at` |
+| 18 | `archive_project` | Архивирует проект без удаления. | `project_id`, `reason` | `project_id`, `archived_at` |
+| 19 | `list_projects` | Возвращает список проектов. | `filters`, `page`, `page_size` | `items[]`, `total` |
+| 20 | `get_project` | Возвращает карточку проекта. | `project_id` | `project` |
+
+### Задачи
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 21 | `create_task` | Создает задачу в проекте. | `project_id`, `title`, `assignee_id`, `due_date` | `task_id`, `created_at` |
+| 22 | `update_task` | Обновляет данные задачи. | `task_id`, `fields{}` | `task_id`, `updated_at` |
+| 23 | `complete_task` | Отмечает задачу выполненной. | `task_id`, `completed_by` | `task_id`, `completed_at` |
+| 24 | `reopen_task` | Возвращает задачу в работу. | `task_id`, `reason` | `task_id`, `status` |
+| 25 | `list_tasks` | Возвращает задачи с фильтрами. | `project_id`, `filters`, `page` | `items[]`, `total` |
+| 26 | `get_task` | Возвращает подробности задачи. | `task_id` | `task` |
+
+### Комментарии и файлы
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 27 | `add_comment` | Добавляет комментарий к объекту. | `entity_type`, `entity_id`, `author_id`, `text` | `comment_id`, `created_at` |
+| 28 | `list_comments` | Возвращает комментарии объекта. | `entity_type`, `entity_id`, `page` | `items[]`, `total` |
+| 29 | `upload_file` | Загружает файл и сохраняет метаданные. | `file`, `owner_id`, `tags[]` | `file_id`, `url` |
+| 30 | `get_file` | Возвращает метаданные файла. | `file_id` | `file` |
+| 31 | `delete_file` | Удаляет файл с хранением истории. | `file_id`, `reason` | `file_id`, `status` |
+
+### Теги
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 32 | `create_tag` | Создает тег для классификации. | `name`, `color` | `tag_id` |
+| 33 | `list_tags` | Возвращает список тегов. | `filters` | `items[]` |
+| 34 | `assign_tag` | Назначает тег объекту. | `entity_type`, `entity_id`, `tag_id` | `entity_id`, `tag_id` |
+| 35 | `remove_tag` | Снимает тег с объекта. | `entity_type`, `entity_id`, `tag_id` | `entity_id`, `tag_id` |
+
+### Уведомления и вебхуки
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 36 | `create_notification` | Создает уведомление пользователю. | `user_id`, `title`, `body`, `channel` | `notification_id` |
+| 37 | `list_notifications` | Возвращает уведомления пользователя. | `user_id`, `status`, `page` | `items[]`, `total` |
+| 38 | `mark_notification_read` | Помечает уведомление прочитанным. | `notification_id` | `notification_id`, `read_at` |
+| 39 | `create_webhook` | Создает вебхук на событие. | `event`, `target_url`, `secret` | `webhook_id` |
+| 40 | `list_webhooks` | Возвращает список вебхуков. | `filters` | `items[]` |
+| 41 | `delete_webhook` | Удаляет вебхук. | `webhook_id` | `webhook_id`, `status` |
+
+### Аудит и отчеты
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 42 | `create_audit_entry` | Записывает событие аудита. | `actor_id`, `action`, `entity` | `audit_id`, `created_at` |
+| 43 | `list_audit_entries` | Возвращает аудит с фильтрами. | `filters`, `page` | `items[]`, `total` |
 | 44 | `create_report` | Создает отчет по данным. | `name`, `query`, `schedule` | `report_id` |
 | 45 | `run_report` | Запускает генерацию отчета. | `report_id`, `parameters{}` | `run_id`, `status` |
 | 46 | `get_report_result` | Возвращает результат отчета. | `run_id` | `report_result` |
+
+### Импорт/экспорт и мониторинг
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
 | 47 | `export_data` | Экспортирует данные в файл. | `entity`, `filters`, `format` | `export_id`, `url` |
 | 48 | `import_data` | Импортирует данные из файла. | `entity`, `file`, `mode` | `import_id`, `status` |
 | 49 | `health_check` | Возвращает статус сервисов. | `scope` | `status`, `services[]` |
@@ -75,6 +125,7 @@
 | 60 | `list_support_tickets` | Возвращает список тикетов. | `filters`, `page` | `items[]`, `total` |
 | 61 | `create_alert_rule` | Создает правило алерта по метрике. | `metric`, `threshold`, `window` | `alert_id` |
 
+## 20 основных пользовательских сценариев
 ## 23 типовых сценария использования
 ## Дополнительные функции для отзывов и подтверждений
 
@@ -137,6 +188,12 @@
 | 9 | `macro_bulk_export` | Массовый экспорт данных. | `export_data` → `create_audit_entry` |
 | 10 | `macro_incident_check` | Быстрая проверка инцидента. | `health_check` → `get_system_metrics` → `create_audit_entry` |
 
+## Сверка объема с ресурсами и сроками
+
+- **Объем**: 50 функций, 20 пользовательских сценариев, 10 макросов, 20 интеграций/приложений.
+- **Ресурсы**: состав команды и доступность экспертов требуют фиксации в `integration_inventory.md`.
+- **Сроки**: в `timeline.md` отсутствуют оценки длительности и дат; необходимо заполнить базовые оценки и буферы, чтобы подтвердить реализуемость объема.
+- **Вывод**: текущий объем зафиксирован, но подтверждение сроков возможно только после заполнения оценок и ресурсов.
 ## Мониторинг, метрики и поддержка пользователей
 
 - **Мониторинг**: метрики инфраструктуры и продукта собираются через `get_system_metrics` и события `track_funnel`, с правилами оповещений через `create_alert_rule`.
