@@ -9,6 +9,7 @@
 - `schemas/macro.schema.json` — схема валидации.
 - `templates/macros.yaml` — набор шаблонов макросов.
 - `docs/catalog/overview.md` — правила и назначение каталога приложений.
+- `docs/catalog/function-mapping.md` — привязка каталога к Function Dictionary.
 
 ## Планы и организационные документы
 
