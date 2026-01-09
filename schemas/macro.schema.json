@@ -13,6 +13,7 @@
     "errors",
     "result",
     "parameters",
+    "quality_metrics",
     "reliability",
     "version"
   ],
@@ -99,6 +100,16 @@
         },
         "additionalProperties": false
       }
+    },
+    "quality_metrics": {
+      "type": "object",
+      "required": ["setup_time_minutes", "stability", "success_rate"],
+      "properties": {
+        "setup_time_minutes": { "type": "number", "minimum": 0 },
+        "stability": { "type": "string", "enum": ["low", "medium", "high"] },
+        "success_rate": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": false
     },
     "reliability": {
       "type": "object",
