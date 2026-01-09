@@ -7,9 +7,14 @@ apps:
       - Поиск по сообщениям и файлам
       - Интеграции с инструментами разработки
       - Автоматизация через workflow builder
+    limitations:
+      - Ограничение истории сообщений в бесплатном плане.
+    price: tiered
     compatibility: [jira, github, google-meet, zoom]
+    documentation: https://slack.com/help
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Командная коммуникация
       - Оперативные уведомления
@@ -26,9 +31,14 @@ apps:
       - Чаты и видеозвонки
       - Совместная работа с файлами
       - Корпоративное управление доступом
+    limitations:
+      - Зависимость от лицензий Microsoft 365 для расширенных функций.
+    price: tiered
     compatibility: [jira, zoom, sharepoint, outlook]
+    documentation: https://learn.microsoft.com/microsoftteams/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Корпоративные коммуникации
       - Видеовстречи
@@ -45,9 +55,14 @@ apps:
       - Видеоконференции
       - Вебинары
       - Запись встреч
+    limitations:
+      - Лимит времени встреч в бесплатном плане.
+    price: tiered
     compatibility: [slack, microsoft-teams, google-calendar, outlook]
+    documentation: https://support.zoom.com/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Видеовстречи
       - Обучение и вебинары
@@ -64,9 +79,14 @@ apps:
       - Видеозвонки в браузере
       - Совместные встречи из календаря
       - Запись и транскрипция
+    limitations:
+      - Запись и расширенные функции доступны в платных планах Workspace.
+    price: tiered
     compatibility: [google-calendar, slack, asana]
+    documentation: https://support.google.com/meet/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Видеозвонки
       - Встречи с клиентами
@@ -83,9 +103,14 @@ apps:
       - Планирование спринтов
       - Управление бэклогом
       - Отчеты по задачам
+    limitations:
+      - Требует настройки для сложных процессов.
+    price: tiered
     compatibility: [confluence, slack, github, bitbucket]
+    documentation: https://support.atlassian.com/jira-software-cloud/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Управление разработкой
       - Agile-процессы
@@ -102,9 +127,14 @@ apps:
       - Канбан-доски
       - Шаблоны проектов
       - Автоматизация Butler
+    limitations:
+      - Ограничения на автоматизации в бесплатном плане.
+    price: freemium
     compatibility: [slack, google-drive, jira]
+    documentation: https://support.atlassian.com/trello/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Визуальное управление задачами
       - Личные и командные проекты
@@ -121,9 +151,14 @@ apps:
       - Управление задачами
       - Таймлайны проектов
       - Шаблоны рабочих процессов
+    limitations:
+      - Ограничения на таймлайны и портфели в бесплатном плане.
+    price: tiered
     compatibility: [slack, google-meet, zoom]
+    documentation: https://asana.com/guide
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Проектное управление
       - Кросс-функциональные проекты
@@ -140,9 +175,14 @@ apps:
       - Документы и базы знаний
       - Таблицы и базы данных
       - Шаблоны рабочих пространств
+    limitations:
+      - Лимиты блоков и гостей на бесплатных планах.
+    price: freemium
     compatibility: [slack, google-drive, github]
+    documentation: https://www.notion.so/help
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - База знаний
       - Документация проектов
@@ -159,9 +199,14 @@ apps:
       - Документация команд
       - Совместное редактирование
       - Шаблоны страниц
+    limitations:
+      - Расширенные настройки доступны в платных планах.
+    price: tiered
     compatibility: [jira, slack, google-drive]
+    documentation: https://support.atlassian.com/confluence/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - База знаний
       - Документирование процессов
@@ -178,9 +223,14 @@ apps:
       - Хостинг репозиториев
       - Code review
       - CI/CD через GitHub Actions
+    limitations:
+      - Расширенные security функции доступны в платных планах.
+    price: freemium
     compatibility: [jira, slack, notion]
+    documentation: https://docs.github.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Совместная разработка
       - Автоматизация релизов
@@ -197,9 +247,14 @@ apps:
       - Репозитории и MR
       - CI/CD pipelines
       - Управление уязвимостями
+    limitations:
+      - Некоторые DevSecOps функции доступны в премиум тарифах.
+    price: tiered
     compatibility: [jira, slack, kubernetes]
+    documentation: https://docs.gitlab.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - DevSecOps
       - CI/CD
@@ -216,9 +271,14 @@ apps:
       - Git-репозитории
       - Pull requests
       - CI/CD через Pipelines
+    limitations:
+      - Ограничения на CI минуты и пользователей в бесплатном плане.
+    price: tiered
     compatibility: [jira, confluence]
+    documentation: https://support.atlassian.com/bitbucket-cloud/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Разработка в экосистеме Atlassian
     licensing:
@@ -234,9 +294,14 @@ apps:
       - UI/UX дизайн
       - Совместное редактирование
       - Компонентные библиотеки
+    limitations:
+      - Ограничения на совместную работу в бесплатном плане.
+    price: tiered
     compatibility: [jira, github, notion]
+    documentation: https://help.figma.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Проектирование интерфейсов
       - Дизайн-системы
@@ -253,9 +318,14 @@ apps:
       - Онлайн-доски
       - Шаблоны воркшопов
       - Совместное рисование
+    limitations:
+      - Ограничения на количество досок в бесплатном плане.
+    price: freemium
     compatibility: [slack, zoom, jira]
+    documentation: https://help.miro.com/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Воркшопы и ретроспективы
       - Визуальные карты
@@ -272,9 +342,14 @@ apps:
       - CRM для продаж
       - Управление лидами
       - Отчеты и аналитика
+    limitations:
+      - Высокая стоимость для небольших команд.
+    price: tiered
     compatibility: [slack, zoom, outlook]
+    documentation: https://help.salesforce.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Управление продажами
       - CRM аналитика
@@ -291,9 +366,14 @@ apps:
       - CRM и маркетинговые кампании
       - Автоматизация писем
       - Воронки продаж
+    limitations:
+      - Бесплатный план ограничен по автоматизациям.
+    price: freemium
     compatibility: [slack, gmail, zoom]
+    documentation: https://knowledge.hubspot.com/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Маркетинг и продажи
       - Управление лидами
@@ -310,9 +390,14 @@ apps:
       - Тикетинг поддержки
       - База знаний
       - Омниканальные каналы
+    limitations:
+      - Расширенные каналы доступны в верхних планах.
+    price: tiered
     compatibility: [slack, salesforce, jira]
+    documentation: https://support.zendesk.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Служба поддержки
       - Управление обращениями
@@ -329,9 +414,14 @@ apps:
       - Чат с клиентами
       - Автоматизация поддержки
       - Боты и help center
+    limitations:
+      - Стоимость зависит от числа активных пользователей.
+    price: tiered
     compatibility: [slack, zendesk, salesforce]
+    documentation: https://www.intercom.com/help
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Customer success
       - Чат поддержки
@@ -348,9 +438,14 @@ apps:
       - Онлайн-платежи
       - Подписки и инвойсы
       - Управление рисками
+    limitations:
+      - Комиссии за транзакции и зависимости от страны.
+    price: paid
     compatibility: [shopify, salesforce, hubspot]
+    documentation: https://stripe.com/docs
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Прием платежей
       - Управление подписками
@@ -367,9 +462,14 @@ apps:
       - Интернет-магазин
       - Управление каталогом
       - Встроенные платежи
+    limitations:
+      - Комиссии за платежи и приложения.
+    price: tiered
     compatibility: [stripe, mailchimp, google-analytics]
+    documentation: https://help.shopify.com/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Электронная коммерция
       - Запуск D2C брендов
@@ -386,9 +486,14 @@ apps:
       - Email-рассылки
       - Сегментация аудитории
       - Автоматизация маркетинга
+    limitations:
+      - Лимиты контактов в бесплатном плане.
+    price: freemium
     compatibility: [shopify, salesforce, hubspot]
+    documentation: https://mailchimp.com/help/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Email-маркетинг
       - Поддержка e-commerce
@@ -405,9 +510,14 @@ apps:
       - Хранение файлов
       - Совместный доступ
       - Управление версиями
+    limitations:
+      - Ограничения на объем хранения по тарифу.
+    price: tiered
     compatibility: [google-meet, slack, notion]
+    documentation: https://support.google.com/drive/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Обмен файлами
       - Совместная работа
@@ -424,9 +534,14 @@ apps:
       - Электронная почта
       - Интеграция с календарем
       - Фильтры и ярлыки
+    limitations:
+      - Расширенное администрирование в платных планах Workspace.
+    price: freemium
     compatibility: [hubspot, google-calendar, slack]
+    documentation: https://support.google.com/mail/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Почтовые коммуникации
       - Работа с клиентами
@@ -443,9 +558,14 @@ apps:
       - Планирование встреч
       - Напоминания
       - Общие календари
+    limitations:
+      - Расширенные функции доступны в платных планах Workspace.
+    price: freemium
     compatibility: [zoom, google-meet, slack]
+    documentation: https://support.google.com/calendar/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Планирование встреч
       - Календарь команды
@@ -462,9 +582,14 @@ apps:
       - Электронная почта
       - Календарь и контакты
       - Управление задачами
+    limitations:
+      - Дополнительные функции доступны в составе Microsoft 365.
+    price: tiered
     compatibility: [microsoft-teams, zoom, salesforce]
+    documentation: https://support.microsoft.com/outlook
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Корпоративная почта
       - Планирование встреч
@@ -481,9 +606,14 @@ apps:
       - Корпоративные порталы
       - Совместные сайты
       - Управление документами
+    limitations:
+      - Требует администрирования Microsoft 365.
+    price: tiered
     compatibility: [microsoft-teams, outlook]
+    documentation: https://support.microsoft.com/sharepoint
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Интранет и порталы
       - Документооборот
@@ -500,9 +630,14 @@ apps:
       - Оркестрация контейнеров
       - Автоматическое масштабирование
       - Самовосстановление сервисов
+    limitations:
+      - Требует опыта DevOps и поддержки инфраструктуры.
+    price: free
     compatibility: [gitlab, github]
+    documentation: https://kubernetes.io/docs/
     support_status: active
     maturity: enterprise
+    update_status: active
     use_cases:
       - Управление инфраструктурой
       - Микросервисные платформы
@@ -519,9 +654,14 @@ apps:
       - Аналитика трафика
       - Сегментация аудитории
       - Отчеты и дашборды
+    limitations:
+      - Сэмплирование данных в бесплатной версии.
+    price: freemium
     compatibility: [shopify, google-drive]
+    documentation: https://support.google.com/analytics/
     support_status: active
     maturity: stable
+    update_status: active
     use_cases:
       - Аналитика маркетинга
       - Отчетность по трафику
