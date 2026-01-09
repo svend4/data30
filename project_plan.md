@@ -55,7 +55,16 @@
 - DevOps Engineer / SRE
 - Release Manager
 
-## 5. Зависимости между этапами
+## 5. Владельцы deliverables MVP (R/A)
+| Этап | Deliverable | Владелец (Accountable) | Поддержка |
+| --- | --- | --- | --- |
+| Discovery | PRD/BRD, KPI и traceability | Product Manager | Sponsor, QA Lead |
+| Design | UX/UI прототип и пользовательские потоки | UX/UI Designer | Product Manager, Solution Architect |
+| Development | Реализация MVP и интеграции | Tech Lead | Backend/Frontend Engineers |
+| QA | План тестирования и отчеты по качеству | QA Lead | QA Engineer, Tech Lead |
+| Release | Релизный пакет и выкладка | Release Manager | DevOps/SRE |
+
+## 6. Зависимости между этапами
 - Discovery блокирует старт Design.
 - Design блокирует Development (архитектура и UX/UI).
 - Development блокирует QA (доступность фич).
