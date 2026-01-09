@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph External[Внешняя среда]
+    partners[Партнерские системы]
+    idp[Identity Provider]
+    billing[Платежный шлюз]
+  end
+
+  subgraph System[Целевая система]
+    api[API Gateway]
+    core[Core Service]
+    data[(Data Store)]
+  end
+
+  user[Пользователь] --> api
+  api --> core
+  core --> data
+  api <-->|OAuth/SAML| idp
+  core <-->|Webhooks/API| partners
+  core <-->|Payments API| billing
