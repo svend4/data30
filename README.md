@@ -8,6 +8,7 @@
 - `docs/macros/guide.md` — руководство по использованию.
 - `schemas/macro.schema.json` — схема валидации.
 - `templates/macros.yaml` — набор шаблонов макросов.
+- `docs/catalog/overview.md` — правила и назначение каталога приложений.
 
 ## Планы и организационные документы
 
