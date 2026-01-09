@@ -24,6 +24,8 @@
 - Настройка инфраструктуры/репозитория — 2–4 дня — DevOps Engineer
 - Реализация ключевых фич (MVP) — 15–25 дней — Engineering Team
 - Интеграции и API — 10–15 дней — Backend Engineer
+- Расширение функций и интеграций сверх MVP — 8–12 дней — Backend/Frontend Engineer
+- Публичные API‑контракты (OpenAPI/SDK) — 5–8 дней — Backend Engineer
 
 ### QA (2–3 недели)
 - Подготовка тест-плана и сценариев — 3–5 дней — QA Lead
@@ -54,6 +56,8 @@
 - QA Lead / QA Engineer
 - DevOps Engineer / SRE
 - Release Manager
+
+**Усиление на Beta‑этап:** выделить дополнительные ресурсы Backend/Frontend и QA для регрессии и расширенного тест‑покрытия, а также DevOps/SRE для поддержки инфраструктуры тестирования и staging.
 
 ## 5. Зависимости между этапами
 - Discovery блокирует старт Design.
