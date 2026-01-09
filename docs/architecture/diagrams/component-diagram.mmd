@@ -1,0 +1,10 @@
+flowchart LR
+  user[Пользователь] -->|HTTP/HTTPS| ui[Web UI]
+  ui -->|REST/GraphQL| api[API Gateway]
+  api --> auth[Сервис аутентификации]
+  api --> core[Core Service]
+  core --> db[(Primary DB)]
+  core --> cache[(Cache)]
+  core --> mq[(Message Broker)]
+  core --> worker[Async Worker]
+  worker --> ext[Внешние интеграции]
