@@ -36,6 +36,7 @@
 - **Зрелость:** draft / beta / stable / deprecated.
 - **Цена:** free / paid + модель (per call, per GB, per user).
 - **Совместимость:** версии API, поддерживаемые форматы и SDK.
+- **Статус поддержки:** active / limited / deprecated / discontinued.
 - **Ограничения:** лимиты размера, RPS, квоты.
 - **SLA:** доступность, латентность, время восстановления.
 
@@ -55,6 +56,7 @@
 | Зрелость | draft/beta/stable/deprecated |
 | Цена | Модель тарификации |
 | Совместимость | Версии API, SDK, форматы |
+| Статус поддержки | active/limited/deprecated/discontinued |
 | SLA | Доступность, латентность |
 | Примечания | Доп. сведения |
 
@@ -80,6 +82,7 @@
   "maturity": "beta",
   "pricing": "free",
   "compatibility": {"api_versions": ["v1"], "formats": ["json"]},
+  "support_status": "active",
   "sla": {"availability": "99.9%", "latency_p95_ms": 200},
   "notes": "Uses libphonenumber rules"
 }
@@ -108,6 +111,7 @@ pricing: free
 compatibility:
   api_versions: [v1]
   formats: [json]
+support_status: active
 sla:
   availability: 99.9%
   latency_p95_ms: 200
@@ -115,6 +119,8 @@ notes: Uses libphonenumber rules
 ```
 
 ## 5. MVP‑словарь функций (60 шт.)
+
+**Статус зрелости:** все ключевые функции в MVP фиксируются на уровне `beta`.
 
 | Функция | Категория | Описание | Пример входа | Пример выхода |
 | --- | --- | --- | --- | --- |
