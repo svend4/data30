@@ -37,7 +37,7 @@
 - **Цена:** free / paid + модель (per call, per GB, per user).
 - **Совместимость:** версии API, поддерживаемые форматы и SDK.
 - **Ограничения:** лимиты размера, RPS, квоты.
-- **SLA:** доступность, латентность, время восстановления.
+- **SLA:** целевые показатели доступности, p95 латентности и время восстановления (как метрики зрелого продукта).
 
 ## 4. Шаблон паспорта функции
 
@@ -55,7 +55,7 @@
 | Зрелость | draft/beta/stable/deprecated |
 | Цена | Модель тарификации |
 | Совместимость | Версии API, SDK, форматы |
-| SLA | Доступность, латентность |
+| SLA | Целевые показатели доступности, p95 латентности, RTO/RPO |
 | Примечания | Доп. сведения |
 
 ### JSON
@@ -80,7 +80,11 @@
   "maturity": "beta",
   "pricing": "free",
   "compatibility": {"api_versions": ["v1"], "formats": ["json"]},
-  "sla": {"availability": "99.9%", "latency_p95_ms": 200},
+  "sla": {
+    "availability_target": "99.9%",
+    "latency_p95_ms_target": 200,
+    "rto_minutes_target": 30
+  },
   "notes": "Uses libphonenumber rules"
 }
 ```
@@ -109,8 +113,9 @@ compatibility:
   api_versions: [v1]
   formats: [json]
 sla:
-  availability: 99.9%
-  latency_p95_ms: 200
+  availability_target: 99.9%
+  latency_p95_ms_target: 200
+  rto_minutes_target: 30
 notes: Uses libphonenumber rules
 ```
 
