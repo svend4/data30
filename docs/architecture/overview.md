@@ -1,3 +1,12 @@
+# Architecture Overview
+
+## Interfaces
+
+The Data30 service exposes the following external interfaces:
+
+- **REST/HTTP API**: The primary client-facing interface for health checks and dataset management. The formal contract is defined in [`docs/api/openapi.yaml`](../api/openapi.yaml).
+
+If future event-driven integrations are added, an AsyncAPI specification will be published alongside the OpenAPI document.
 # Обзор целевой архитектуры
 
 ## Контекст
@@ -26,6 +35,9 @@
 ## Диаграммы
 - [Контекстная диаграмма](diagrams/context-diagram.mmd)
 - [Диаграмма компонентов](diagrams/component-diagram.mmd)
+
+## Эксплуатационная архитектура
+- [Инфраструктура и DevOps-практики](operations.md)
 
 ---
 Версия: 1.0
