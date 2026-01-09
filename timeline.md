@@ -12,14 +12,14 @@
 
 | Stage | Base estimate (days) | Risk criticality (Low/Med/High) | Risk buffer (days) | Dependencies | Critical path | Start date | End date | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1. Discovery & scope | TBD | TBD | TBD | None | TBD | TBD | TBD | TBD |
-| 2. Requirements & solution design | TBD | TBD | TBD | 1 | TBD | TBD | TBD | TBD |
-| 3. Implementation | TBD | TBD | TBD | 2 | TBD | TBD | TBD | TBD |
-| 4. QA & validation | TBD | TBD | TBD | 3 | TBD | TBD | TBD | TBD |
-| 5. Release & handover | TBD | TBD | TBD | 4 | TBD | TBD | TBD | TBD |
+| 1. Discovery & scope | TBD | TBD | TBD | None | Yes | TBD | TBD | TBD |
+| 2. Requirements & solution design | TBD | TBD | TBD | 1 | Yes | TBD | TBD | TBD |
+| 3. Implementation | TBD | TBD | TBD | 2 | Yes | TBD | TBD | TBD |
+| 4. QA & validation | TBD | TBD | TBD | 3 | Yes | TBD | TBD | TBD |
+| 5. Release & handover | TBD | TBD | TBD | 4 | Yes | TBD | TBD | TBD |
 
 ## Critical Path Summary
-- List the stages on the critical path once dependencies and dates are finalized.
+- Discovery & scope → Requirements & solution design → Implementation → QA & validation → Release & handover.
 
 ## Overall Duration
 - Total base duration: TBD days
