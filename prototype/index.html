@@ -226,6 +226,79 @@
           </article>
         </div>
       </section>
+
+      <section class="panel">
+        <h2>7. Отзывы и подтвержденное использование</h2>
+        <p class="muted">
+          Отзыв доступен только при активном подтверждении использования сценария.
+        </p>
+        <div class="review-grid">
+          <article class="review-card">
+            <div class="review-header">
+              <div>
+                <h3>Сценарий: Автоматизация обработки тикетов</h3>
+                <div class="meta">Подтверждение: SDK · 6 запусков</div>
+              </div>
+              <span class="status-badge verified">Подтверждено</span>
+            </div>
+            <div class="review-form">
+              <label class="field">
+                <span>Оценка качества</span>
+                <select>
+                  <option>5 — Отлично</option>
+                  <option>4 — Хорошо</option>
+                  <option>3 — Средне</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Оценка полезности</span>
+                <select>
+                  <option>5 — Очень полезно</option>
+                  <option>4 — Полезно</option>
+                  <option>3 — Нейтрально</option>
+                </select>
+              </label>
+              <label class="field review-wide">
+                <span>Комментарий</span>
+                <textarea rows="3" placeholder="Что именно подтвердилось на практике?"></textarea>
+              </label>
+              <button class="primary">Отправить отзыв</button>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="review-header">
+              <div>
+                <h3>Сценарий: Классификация обращений по категории</h3>
+                <div class="meta">Подтверждение: отсутствует</div>
+              </div>
+              <span class="status-badge pending">Нет подтверждения</span>
+            </div>
+            <div class="review-form">
+              <label class="field">
+                <span>Оценка качества</span>
+                <select disabled>
+                  <option>Выберите оценку</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Оценка полезности</span>
+                <select disabled>
+                  <option>Выберите оценку</option>
+                </select>
+              </label>
+              <label class="field review-wide">
+                <span>Комментарий</span>
+                <textarea rows="3" placeholder="Подтвердите использование, чтобы оставить отзыв." disabled></textarea>
+              </label>
+              <button class="primary" disabled>Нужно подтверждение</button>
+              <p class="hint">
+                Добавьте подтверждение использования через интеграцию или загрузите лог запуска.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
   </body>
 </html>
