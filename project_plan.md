@@ -35,7 +35,24 @@
 - Деплой на прод — 1–2 дня — DevOps Engineer
 - Пострелизный мониторинг — 3–5 дней — SRE/DevOps
 
-## 3. Реестр рисков
+## 3. WBS (Phase → Workstream → Tasks → Deliverables)
+| Phase | Workstream | Tasks | Deliverables | MVP/Beta/Scale | Responsible (RACI-compatible role) |
+| --- | --- | --- | --- | --- | --- |
+| Discovery | Product discovery | Анализ требований и целей, сбор стейкхолдеров, формирование backlog/roadmap | Подтвержденные требования, приоритизированный backlog | MVP | Product Manager |
+| Design | UX/UI | Прототипирование ключевых экранов (вход, каталог, рекомендация, подтверждение), согласование навигации | Прототип с 4 экранами и лог навигации | MVP | UX/UI Designer |
+| Design | Architecture | Архитектурное проектирование, проработка NFR, базовая схема данных | Архитектура решения, NFR-спецификация | MVP | Solution Architect |
+| Development | Core CRUD | Реализация базовых сценариев для `user/project/task`: create/list/get/update, базовый статус задач | Работающие CRUD сценарии, API/логика | MVP | Engineering Team |
+| Development | UX flow | Реализация UX-минимума: вход → каталог → рекомендация → подтверждение | End-to-end UX-флоу MVP | MVP | Frontend Engineer |
+| Development | Notifications | Уведомления пользователям (create/list/mark read) | Базовые уведомления в продукте | Beta | Backend Engineer |
+| Development | Automation | Макросы для онбординга, старта проекта, завершения задач | Базовые макросы автоматизации | Beta | Backend Engineer |
+| Development | Integrations | Вебхуки событий, отчеты и экспорт данных | Интеграции и отчеты для расширенных сценариев | Beta | Backend Engineer |
+| QA | Functional QA | Подготовка тест-плана, сценарии по core CRUD и UX флоу MVP | Протоколы функционального тестирования | MVP | QA Lead |
+| QA | Regression/Automation | Регрессия по расширенным сценариям, проверка макросов/уведомлений/вебхуков/отчетов | Регрессионный набор Beta | Beta | QA Team |
+| QA | Reliability | Нагрузочные тесты, регрессия, проверка health-check/метрик | Отчет о стабильности и метриках | Scale | QA Lead |
+| Release | Release prep | Релиз-ноты, чеклисты, подготовка окружений | Release package | MVP/Beta | Release Manager |
+| Release | Operations | Деплой, мониторинг, сбор метрик/health-check, пострелизный мониторинг | Production release + post-release monitoring | Scale | DevOps Engineer / SRE |
+
+## 4. Реестр рисков
 | Риск | Вероятность | Влияние | Меры реагирования |
 | --- | --- | --- | --- |
 | Неопределенность требований на старте | Средняя | Высокое | Формализовать требования, проводить регулярные демо и согласования |
@@ -44,7 +61,7 @@
 | Регрессии при частых релизах | Высокая | Среднее | Автоматизация тестов, регрессионный набор |
 | Низкая производительность/масштабируемость | Низкая | Высокое | Нагрузочное тестирование и профилирование |
 
-## 4. Состав команды / ролей (для назначения R/A по RACI)
+## 5. Состав команды / ролей (для назначения R/A по RACI)
 - Product Manager
 - Solution Architect
 - Tech Lead
@@ -55,7 +72,7 @@
 - DevOps Engineer / SRE
 - Release Manager
 
-## 5. Зависимости между этапами
+## 6. Зависимости между этапами
 - Discovery блокирует старт Design.
 - Design блокирует Development (архитектура и UX/UI).
 - Development блокирует QA (доступность фич).
