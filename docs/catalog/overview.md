@@ -8,6 +8,7 @@
 - `catalog/apps.yaml` — список карточек приложений.
 - `catalog/schema.md` — описание полей карточки и минимальных требований.
 - `catalog/compatibility.md` — читаемая карта интеграций по полю `compatibility`.
+- `docs/catalog/function-mapping-table.md` — стартовые сопоставления функций приложений.
 
 ## 2) Назначение каталога
 
@@ -30,4 +31,3 @@
 1. Сверьте поля с `catalog/schema.md`.
 2. Проверьте корректность `compatibility`.
 3. Обновите `catalog/compatibility.md` при появлении новых интеграций.
-
