@@ -13,6 +13,54 @@
 | `created_at` | Timestamp (UTC) | да | Время создания записи. |
 | `updated_at` | Timestamp (UTC) | да | Время последнего изменения записи. |
 
+## 1.1 Сущности отзывов и модерации
+
+### `review`
+
+| Поле | Тип | Обязательное | Описание |
+|---|---|---|---|
+| `id` | UUID (v4) | да | Идентификатор отзыва. |
+| `entity_type` | String | да | Тип объекта отзыва. |
+| `entity_id` | UUID (v4) | да | Идентификатор объекта. |
+| `author_id` | UUID (v4) | да | Автор отзыва. |
+| `rating` | Number | да | Оценка (например, 1–5). |
+| `text` | Text | нет | Текст отзыва. |
+| `status` | Enum | да | `pending`, `approved`, `rejected`. |
+| `fraud_score` | Number | нет | Риск-скор (0–1). |
+| `created_at` | Timestamp (UTC) | да | Время создания. |
+| `updated_at` | Timestamp (UTC) | да | Время обновления. |
+
+### `moderation_queue`
+
+| Поле | Тип | Обязательное | Описание |
+|---|---|---|---|
+| `id` | UUID (v4) | да | Идентификатор очереди. |
+| `review_id` | UUID (v4) | да | Ссылка на отзыв. |
+| `reason` | Text | да | Причина постановки в очередь. |
+| `status` | Enum | да | `open`, `in_review`, `resolved`. |
+| `created_at` | Timestamp (UTC) | да | Время создания. |
+
+### `moderation_decision`
+
+| Поле | Тип | Обязательное | Описание |
+|---|---|---|---|
+| `id` | UUID (v4) | да | Идентификатор решения. |
+| `review_id` | UUID (v4) | да | Ссылка на отзыв. |
+| `moderator_id` | UUID (v4) | да | Модератор. |
+| `decision` | Enum | да | `approved`, `rejected`. |
+| `note` | Text | нет | Комментарий модератора. |
+| `created_at` | Timestamp (UTC) | да | Время решения. |
+
+### `fraud_signal`
+
+| Поле | Тип | Обязательное | Описание |
+|---|---|---|---|
+| `id` | UUID (v4) | да | Идентификатор сигнала. |
+| `review_id` | UUID (v4) | да | Ссылка на отзыв. |
+| `signal_type` | String | да | Тип сигнала (frequency, pattern, repeat, ip_device). |
+| `score` | Number | да | Вес сигнала. |
+| `metadata` | JSONB | нет | Детали (IP, device, шаблон и т.п.). |
+
 ## 2. Связи между сущностями
 
 ### Примеры ключевых связей
