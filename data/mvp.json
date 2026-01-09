@@ -1,0 +1,72 @@
+{
+  "functions": [
+    {
+      "id": "fn_parse_user",
+      "name": "ParseUser",
+      "module_id": "mod_identity",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "fn_calculate_risk",
+      "name": "CalculateRisk",
+      "module_id": "mod_risk",
+      "version": "1.1.0",
+      "status": "active"
+    }
+  ],
+  "modules": [
+    {
+      "id": "mod_identity",
+      "name": "Identity",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "mod_risk",
+      "name": "Risk",
+      "version": "1.1.0",
+      "status": "active"
+    },
+    {
+      "id": "mod_reporting",
+      "name": "Reporting",
+      "version": "0.9.0",
+      "status": "draft"
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "uc_onboard_client",
+      "name": "OnboardClient",
+      "module_ids": ["mod_identity", "mod_risk"],
+      "function_ids": ["fn_parse_user", "fn_calculate_risk"],
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "uc_generate_report",
+      "name": "GenerateReport",
+      "module_ids": ["mod_reporting"],
+      "function_ids": [],
+      "version": "0.9.0",
+      "status": "draft"
+    }
+  ],
+  "macros": [
+    {
+      "id": "macro_daily_batch",
+      "name": "DailyBatch",
+      "use_case_ids": ["uc_onboard_client"],
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "macro_reporting_preview",
+      "name": "ReportingPreview",
+      "use_case_ids": ["uc_generate_report"],
+      "version": "0.9.0",
+      "status": "draft"
+    }
+  ]
+}
