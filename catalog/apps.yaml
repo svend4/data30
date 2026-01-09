@@ -14,7 +14,7 @@ apps:
       - https://slack.com/help
     compatibility: [jira, github, google-meet, zoom]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Командная коммуникация
       - Оперативные уведомления
@@ -38,7 +38,7 @@ apps:
       - https://learn.microsoft.com/microsoftteams/
     compatibility: [jira, zoom, sharepoint, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Корпоративные коммуникации
       - Видеовстречи
@@ -110,7 +110,7 @@ apps:
       - https://support.atlassian.com/jira-software-cloud/
     compatibility: [confluence, slack, github, bitbucket]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление разработкой
       - Agile-процессы
@@ -206,7 +206,7 @@ apps:
       - https://support.atlassian.com/confluence-cloud/
     compatibility: [jira, slack, google-drive]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - База знаний
       - Документирование процессов
@@ -230,7 +230,7 @@ apps:
       - https://docs.github.com/
     compatibility: [jira, slack, notion]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Совместная разработка
       - Автоматизация релизов
@@ -254,7 +254,7 @@ apps:
       - https://docs.gitlab.com/
     compatibility: [jira, slack, kubernetes]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - DevSecOps
       - CI/CD
@@ -301,7 +301,7 @@ apps:
       - https://help.figma.com/
     compatibility: [jira, github, notion]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Проектирование интерфейсов
       - Дизайн-системы
@@ -349,7 +349,7 @@ apps:
       - https://help.salesforce.com/
     compatibility: [slack, zoom, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление продажами
       - CRM аналитика
@@ -397,7 +397,7 @@ apps:
       - https://support.zendesk.com/
     compatibility: [slack, salesforce, jira]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Служба поддержки
       - Управление обращениями
@@ -445,7 +445,7 @@ apps:
       - https://stripe.com/docs
     compatibility: [shopify, salesforce, hubspot]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Прием платежей
       - Управление подписками
@@ -469,7 +469,7 @@ apps:
       - https://help.shopify.com/
     compatibility: [stripe, mailchimp, google-analytics]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Электронная коммерция
       - Запуск D2C брендов
@@ -589,7 +589,7 @@ apps:
       - https://support.microsoft.com/outlook
     compatibility: [microsoft-teams, zoom, salesforce]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Корпоративная почта
       - Планирование встреч
@@ -613,7 +613,7 @@ apps:
       - https://support.microsoft.com/sharepoint
     compatibility: [microsoft-teams, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Интранет и порталы
       - Документооборот
@@ -637,7 +637,7 @@ apps:
       - https://kubernetes.io/docs/
     compatibility: [gitlab, github]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление инфраструктурой
       - Микросервисные платформы

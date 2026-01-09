@@ -77,6 +77,10 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+.grid.four {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -183,6 +187,41 @@ h1 {
   font-size: 12px;
   color: #6b7280;
   margin-top: 12px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.maturity-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.maturity-prototype {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.maturity-stable {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.maturity-recommended {
+  background: #e0e7ff;
+  color: #3730a3;
 }
 
 .list {

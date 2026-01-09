@@ -66,6 +66,7 @@ Function Dictionary (словарь функций) — это единый ка
 - **Аналитика:** статистика, моделирование, ML‑операции.
 
 ## 3. Метаданные
+- **Зрелость:** Prototype / Stable / Recommended.
 ## 3. Метаданные (рекомендуемые)
 - **Зрелость:** draft / beta / stable / deprecated.
 - **Цена:** free / paid + модель (per call, per GB, per user).
@@ -86,6 +87,7 @@ Function Dictionary (словарь функций) — это единый ка
 | Выходы | Типы, формат |
 | Ошибки | Коды, форматы, условия |
 | Ограничения | Лимиты, квоты, RPS |
+| Зрелость | Prototype/Stable/Recommended |
 | Пример | Пример входа/выхода |
 
 ## 5. MVP‑словарь функций (100 шт.)
@@ -406,6 +408,8 @@ Function Dictionary (словарь функций) — это единый ка
   "errors": [
     {"code": "VALIDATION_ERROR", "message": "invalid input"}
   ],
+  "limits": {"max_length": 64, "rps": 100},
+  "maturity": "Prototype",
   "constraints": {"max_length": 64, "rps": 100, "formats": ["json"]},
   "example": {
     "input": {"phone": "+7 999 123-45-67", "default_country": "RU"},
@@ -437,6 +441,7 @@ errors:
 constraints:
   max_length: 64
   rps: 100
+maturity: Prototype
   formats: [json]
 example:
   input:
