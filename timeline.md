@@ -12,19 +12,19 @@
 
 | Stage | Base estimate (days) | Risk criticality (Low/Med/High) | Risk buffer (days) | Dependencies | Critical path | Start date | End date | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1. Discovery & scope | TBD | TBD | TBD | None | TBD | TBD | TBD | TBD |
-| 2. Requirements & solution design | TBD | TBD | TBD | 1 | TBD | TBD | TBD | TBD |
-| 3. Implementation | TBD | TBD | TBD | 2 | TBD | TBD | TBD | TBD |
-| 4. QA & validation | TBD | TBD | TBD | 3 | TBD | TBD | TBD | TBD |
-| 5. Release & handover | TBD | TBD | TBD | 4 | TBD | TBD | TBD | TBD |
+| 1. Discovery & scope | 10 | Low | 2 | None | TBD | TBD | TBD | Buffer 15% |
+| 2. Requirements & solution design | 17 | Medium | 4 | 1 | TBD | TBD | TBD | Buffer 20% |
+| 3. Implementation | 36 | High | 11 | 2 | TBD | TBD | TBD | Buffer 30% |
+| 4. QA & validation | 17 | Medium | 4 | 3 | TBD | TBD | TBD | Buffer 25% |
+| 5. Release & handover | 8 | High | 2 | 4 | TBD | TBD | TBD | Buffer 20% |
 
 ## Critical Path Summary
 - List the stages on the critical path once dependencies and dates are finalized.
 
 ## Overall Duration
-- Total base duration: TBD days
-- Total buffer: TBD days
-- Total duration (base + buffer): TBD days
+- Total base duration: 88 days
+- Total buffer: 23 days
+- Total duration (base + buffer): 111 days
 
 ## Date Baseline
 - Project start: TBD
