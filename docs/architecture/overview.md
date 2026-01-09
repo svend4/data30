@@ -27,6 +27,9 @@
 - [Контекстная диаграмма](diagrams/context-diagram.mmd)
 - [Диаграмма компонентов](diagrams/component-diagram.mmd)
 
+## Эксплуатационная архитектура
+- [Инфраструктура и DevOps-практики](operations.md)
+
 ---
 Версия: 1.0
 
