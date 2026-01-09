@@ -21,7 +21,7 @@
     <main class="layout">
       <section class="panel">
         <h2>1. Запрос пользователя</h2>
-        <p class="muted">Цель, входные данные и ограничения фиксируются перед поиском.</p>
+        <p class="muted">Цель, данные и ограничения фиксируются перед поиском.</p>
         <div class="grid two">
           <label class="field">
             <span>Цель запроса</span>
@@ -32,49 +32,32 @@
             <input type="text" placeholder="CRM, Jira, почта" />
           </label>
           <label class="field">
+            <span>Ожидаемый результат</span>
+            <input type="text" placeholder="Отчет, автоматизация, интеграция" />
+          </label>
+          <label class="field">
             <span>Ограничения</span>
             <input type="text" placeholder="Бюджет, SLA, требования безопасности" />
+          </label>
+          <label class="field">
+            <span>Регуляторика и доступы</span>
+            <input type="text" placeholder="GDPR, 152-ФЗ, роль: оператор" />
           </label>
           <label class="field">
             <span>Ответственный отдел</span>
             <input type="text" placeholder="Продажи, поддержка, финансы" />
           </label>
         </div>
-      </section>
-
-      <section class="panel">
-        <h2>2. Привязка к функциям и сценариям</h2>
-        <p class="muted">Определите бизнес-функцию и сценарии применения.</p>
-        <div class="grid two">
-          <label class="field">
-            <span>Функция</span>
-            <select>
-              <option>Поддержка клиентов</option>
-              <option>Продажи</option>
-              <option>Финансовые операции</option>
-              <option>Маркетинг</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Сценарий</span>
-            <select>
-              <option>Автоматизация тикетов</option>
-              <option>Обогащение лидов</option>
-              <option>Сверка платежей</option>
-              <option>Подготовка отчетов</option>
-            </select>
-          </label>
-        </div>
-        <div class="tags">
-          <span class="tag">SLA 4 часа</span>
-          <span class="tag">Только входящие каналы</span>
-          <span class="tag">Ручная проверка</span>
+        <div class="chips">
+          <span class="chip">Гипотеза: -30% времени</span>
+          <span class="chip">Данные: частично очищены</span>
+          <span class="chip">Окно внедрения: 2 недели</span>
         </div>
       </section>
 
       <section class="panel">
-        <h2>3. Фильтры</h2>
-        <p class="muted">Отфильтруйте по стоимости, зрелости и интеграциям.</p>
+        <h2>2. Фильтры</h2>
+        <p class="muted">Отфильтруйте по стоимости, зрелости, совместимости и категориям.</p>
         <div class="grid three">
           <label class="field">
             <span>Стоимость</span>
@@ -90,41 +73,75 @@
             </select>
           </label>
           <label class="field">
-            <span>Интеграции</span>
+            <span>Категория</span>
+            <select>
+              <option>Поддержка клиентов</option>
+              <option>Продажи</option>
+              <option>Финансы</option>
+              <option>Маркетинг</option>
+              <option>Аналитика</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Совместимость</span>
             <div class="stack">
               <label><input type="checkbox" checked /> CRM</label>
-              <label><input type="checkbox" /> ERP</label>
               <label><input type="checkbox" checked /> Service Desk</label>
+              <label><input type="checkbox" /> ERP</label>
+              <label><input type="checkbox" /> BI</label>
+            </div>
+          </label>
+          <label class="field">
+            <span>Модель внедрения</span>
+            <select>
+              <option>Облачная</option>
+              <option>On-premise</option>
+              <option>Гибрид</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Совместимость данных</span>
+            <div class="stack">
+              <label><input type="checkbox" checked /> JSON/API</label>
+              <label><input type="checkbox" /> CSV/XLSX</label>
+              <label><input type="checkbox" /> Webhook</label>
             </div>
           </label>
         </div>
       </section>
 
       <section class="panel">
-        <h2>4. Рекомендации по похожим сценариям</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Автоматизация повторяющихся обращений</h3>
-            <p>Похожий сценарий с акцентом на автоответы и классификацию тикетов.</p>
-            <div class="meta">Схожесть 86% · Поддержка · Проверено</div>
-          </article>
-          <article class="card">
-            <h3>Маршрутизация запросов по SLA</h3>
-            <p>Фокус на приоритетах и правилах распределения задач.</p>
-            <div class="meta">Схожесть 78% · Операции · Масштабировано</div>
-          </article>
-          <article class="card">
-            <h3>Сбор обратной связи после закрытия</h3>
-            <p>Сценарий для повышения NPS и аналитики качества.</p>
-            <div class="meta">Схожесть 72% · Поддержка · MVP</div>
-          </article>
+        <h2>3. Поиск по функциям и сценариям</h2>
+        <p class="muted">Введите ключевые функции и сценарии, по которым нужно искать.</p>
+        <div class="grid two">
+          <label class="field">
+            <span>Поиск по функциям</span>
+            <input type="text" placeholder="Классификация, маршрутизация, SLA" />
+          </label>
+          <label class="field">
+            <span>Поиск по сценариям</span>
+            <input type="text" placeholder="Автотикеты, эскалации, NPS" />
+          </label>
+        </div>
+        <div class="tags">
+          <span class="tag">Ключевая функция: автоответ</span>
+          <span class="tag">Сценарий: обработка входящих</span>
+          <span class="tag">Сигнал: SLA</span>
         </div>
       </section>
 
       <section class="panel">
-        <h2>5. Лучшие альтернативы и аналогичные макросы</h2>
-        <div class="grid two">
-          <div>
+        <h2>4. Рекомендации: похожие сценарии, альтернативы, лучшие макросы</h2>
+        <div class="grid three">
+          <div class="list-card">
+            <h3>Похожие сценарии</h3>
+            <ul class="list">
+              <li>Автоматизация повторяющихся обращений (схожесть 86%).</li>
+              <li>Маршрутизация запросов по SLA (схожесть 78%).</li>
+              <li>Сбор обратной связи после закрытия (схожесть 72%).</li>
+            </ul>
+          </div>
+          <div class="list-card">
             <h3>Лучшие альтернативы</h3>
             <ul class="list">
               <li>Гибридный сценарий с оператором на финальном шаге.</li>
@@ -132,19 +149,56 @@
               <li>Интеграция с BI для мониторинга нагрузки.</li>
             </ul>
           </div>
-          <div>
-            <h3>Аналогичные макросы</h3>
+          <div class="list-card">
+            <h3>Лучшие макросы</h3>
             <ul class="list">
-              <li>Шаблон автоответа с уточняющими вопросами.</li>
-              <li>Макрос для классификации по темам.</li>
-              <li>Макрос для эскалации в L2/L3.</li>
+              <li>Макрос автоответа с уточнением SLA.</li>
+              <li>Макрос классификации по темам и приоритетам.</li>
+              <li>Макрос эскалации в L2/L3 с алертами.</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section class="panel">
-        <h2>6. Результаты поиска</h2>
+        <h2>5. Критерии релевантности</h2>
+        <p class="muted">Ранжирование учитывает соответствие запросу и качество внедрения.</p>
+        <div class="criteria">
+          <div class="criteria-item">
+            <strong>Совпадение цели и функции</strong>
+            <span>35% веса · соответствие описанию и тегам</span>
+          </div>
+          <div class="criteria-item">
+            <strong>Совместимость данных</strong>
+            <span>20% веса · интеграции, форматы, SLA</span>
+          </div>
+          <div class="criteria-item">
+            <strong>Качество и зрелость</strong>
+            <span>20% веса · отзывы, стабильность, статус</span>
+          </div>
+          <div class="criteria-item">
+            <strong>Экономический эффект</strong>
+            <span>15% веса · ROI, стоимость владения</span>
+          </div>
+          <div class="criteria-item">
+            <strong>Популярность сценария</strong>
+            <span>10% веса · частота использования</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>6. UX-прототип: результаты поиска</h2>
+        <div class="results-header">
+          <div>
+            <h3>12 подходящих сценариев</h3>
+            <p class="muted">Сортировка по релевантности и зрелости.</p>
+          </div>
+          <div class="chips">
+            <span class="chip">Сортировка: релевантность</span>
+            <span class="chip">Показать: рекомендованные</span>
+          </div>
+        </div>
         <div class="results">
           <article>
             <div>
