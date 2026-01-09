@@ -65,6 +65,10 @@ macros:
         required: true
         description: "Текст обращения"
         example: "Не могу войти в аккаунт"
+    quality_metrics:
+      setup_time_minutes: 45
+      stability: "medium"
+      success_rate: 0.92
     reliability:
       score: 0.78
       confidence: "medium"
@@ -122,6 +126,10 @@ macros:
         default: "overdue_v1"
         description: "Шаблон письма"
         example: "overdue_v2"
+    quality_metrics:
+      setup_time_minutes: 20
+      stability: "high"
+      success_rate: 0.96
     reliability:
       score: 0.85
       confidence: "high"
@@ -181,6 +189,10 @@ macros:
         required: true
         description: "Контакт руководителя"
         example: "@teamlead"
+    quality_metrics:
+      setup_time_minutes: 35
+      stability: "medium"
+      success_rate: 0.9
     reliability:
       score: 0.72
       confidence: "medium"
@@ -236,6 +248,10 @@ macros:
         required: true
         description: "Список получателей"
         example: ["ceo@example.com"]
+    quality_metrics:
+      setup_time_minutes: 50
+      stability: "medium"
+      success_rate: 0.91
     reliability:
       score: 0.8
       confidence: "medium"
@@ -296,6 +312,10 @@ macros:
         required: true
         description: "Краткие детали инцидента"
         example: "Падение базы данных"
+    quality_metrics:
+      setup_time_minutes: 25
+      stability: "medium"
+      success_rate: 0.88
     reliability:
       score: 0.76
       confidence: "medium"
@@ -363,6 +383,10 @@ macros:
         required: true
         description: "Список адресатов"
         example: ["legal@example.com"]
+    quality_metrics:
+      setup_time_minutes: 60
+      stability: "medium"
+      success_rate: 0.86
     reliability:
       score: 0.69
       confidence: "medium"
@@ -527,6 +551,10 @@ macros:
         required: true
         description: "Шаблон брифа"
         example: "marketing_brief_v1"
+    quality_metrics:
+      setup_time_minutes: 40
+      stability: "medium"
+      success_rate: 0.89
     reliability:
       score: 0.7
       confidence: "medium"
@@ -587,6 +615,10 @@ macros:
         required: true
         description: "Ответственный за проверку"
         example: "@knowledge_owner"
+    quality_metrics:
+      setup_time_minutes: 30
+      stability: "medium"
+      success_rate: 0.9
     reliability:
       score: 0.74
       confidence: "medium"
@@ -648,6 +680,10 @@ macros:
         default: 0.6
         description: "Минимальный скор качества"
         example: 0.7
+    quality_metrics:
+      setup_time_minutes: 55
+      stability: "low"
+      success_rate: 0.82
     reliability:
       score: 0.67
       confidence: "low"
@@ -715,6 +751,10 @@ macros:
         required: true
         description: "Шаблон SMS"
         example: "delivery_update_v1"
+    quality_metrics:
+      setup_time_minutes: 45
+      stability: "medium"
+      success_rate: 0.9
     reliability:
       score: 0.73
       confidence: "medium"
@@ -770,6 +810,10 @@ macros:
         required: true
         description: "Список ответственных"
         example: ["security@example.com"]
+    quality_metrics:
+      setup_time_minutes: 35
+      stability: "high"
+      success_rate: 0.94
     reliability:
       score: 0.81
       confidence: "medium"
@@ -829,6 +873,10 @@ macros:
         required: true
         description: "ID контента"
         example: "post_123"
+    quality_metrics:
+      setup_time_minutes: 30
+      stability: "medium"
+      success_rate: 0.9
     reliability:
       score: 0.77
       confidence: "medium"
@@ -889,6 +937,10 @@ macros:
         default: 1000
         description: "Минимальная сумма заказа"
         example: 1500
+    quality_metrics:
+      setup_time_minutes: 25
+      stability: "medium"
+      success_rate: 0.87
     reliability:
       score: 0.71
       confidence: "medium"
@@ -944,6 +996,10 @@ macros:
         required: true
         description: "Идентификатор политики хранения"
         example: "retention_v2"
+    quality_metrics:
+      setup_time_minutes: 40
+      stability: "high"
+      success_rate: 0.97
     reliability:
       score: 0.83
       confidence: "high"
