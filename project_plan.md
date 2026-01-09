@@ -50,9 +50,10 @@
 - Tech Lead
 - UX/UI Designer
 - Backend Engineer
+- Backend/Platform Engineer (API Gateway, Cache, Message Broker)
 - Frontend Engineer
-- QA Lead / QA Engineer
-- DevOps Engineer / SRE
+- QA Lead / QA Engineer (регрессия и нагрузочное тестирование)
+- DevOps Engineer / SRE (масштабирование, наблюдаемость, SLI/SLO)
 - Release Manager
 
 ## 5. Зависимости между этапами
