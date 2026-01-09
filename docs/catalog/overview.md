@@ -11,6 +11,7 @@
 - `docs/catalog/function-mapping-table.md` — стартовые сопоставления функций приложений.
 - `docs/catalog/app-card-template.md` — шаблон карточки приложения.
 - `docs/catalog/validation-checklist.md` — чеклист проверки каталога.
+- `docs/catalog/compatibility-update.md` — правила обновления карты совместимости.
 
 ## 2) Назначение каталога
 
