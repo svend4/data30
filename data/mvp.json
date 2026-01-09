@@ -1,0 +1,143 @@
+{
+  "functions": [
+    {
+      "id": "fn_parse_user",
+      "name": "ParseUser",
+      "module_ids": ["mod_identity"],
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-01T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-01T00:00:00Z",
+      "updated_at": "2024-07-01T00:00:00Z"
+    },
+    {
+      "id": "fn_calculate_risk",
+      "name": "CalculateRisk",
+      "module_ids": ["mod_risk"],
+      "version": "1.1.0",
+      "revision": 2,
+      "effective_at": "2024-07-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-10T00:00:00Z",
+      "updated_at": "2024-07-15T00:00:00Z"
+    }
+  ],
+  "modules": [
+    {
+      "id": "mod_identity",
+      "name": "Identity",
+      "function_ids": ["fn_parse_user"],
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-01T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-01T00:00:00Z",
+      "updated_at": "2024-07-01T00:00:00Z"
+    },
+    {
+      "id": "mod_risk",
+      "name": "Risk",
+      "function_ids": ["fn_calculate_risk"],
+      "version": "1.1.0",
+      "revision": 2,
+      "effective_at": "2024-07-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-10T00:00:00Z",
+      "updated_at": "2024-07-15T00:00:00Z"
+    },
+    {
+      "id": "mod_reporting",
+      "name": "Reporting",
+      "function_ids": [],
+      "version": "0.9.0",
+      "revision": 1,
+      "effective_at": "2024-06-20T00:00:00Z",
+      "status": "draft",
+      "created_at": "2024-06-20T00:00:00Z",
+      "updated_at": "2024-06-20T00:00:00Z"
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "uc_onboard_client",
+      "name": "OnboardClient",
+      "module_ids": ["mod_identity", "mod_risk"],
+      "function_ids": ["fn_parse_user", "fn_calculate_risk"],
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-15T00:00:00Z",
+      "updated_at": "2024-07-15T00:00:00Z"
+    },
+    {
+      "id": "uc_generate_report",
+      "name": "GenerateReport",
+      "module_ids": ["mod_reporting"],
+      "function_ids": [],
+      "version": "0.9.0",
+      "revision": 1,
+      "effective_at": "2024-06-20T00:00:00Z",
+      "status": "draft",
+      "created_at": "2024-06-20T00:00:00Z",
+      "updated_at": "2024-06-20T00:00:00Z"
+    }
+  ],
+  "macros": [
+    {
+      "id": "macro_daily_batch",
+      "name": "DailyBatch",
+      "use_case_ids": ["uc_onboard_client"],
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-15T00:00:00Z",
+      "updated_at": "2024-07-15T00:00:00Z"
+    },
+    {
+      "id": "macro_reporting_preview",
+      "name": "ReportingPreview",
+      "use_case_ids": ["uc_generate_report"],
+      "version": "0.9.0",
+      "revision": 1,
+      "effective_at": "2024-06-20T00:00:00Z",
+      "status": "draft",
+      "created_at": "2024-06-20T00:00:00Z",
+      "updated_at": "2024-06-20T00:00:00Z"
+    }
+  ],
+  "ratings": [
+    {
+      "id": "rating_quality_4",
+      "name": "QualityRating",
+      "score": 4,
+      "scale": "1-5",
+      "label": "good",
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-20T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-20T00:00:00Z",
+      "updated_at": "2024-07-20T00:00:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "review_fn_parse_user",
+      "name": "ParseUserReview",
+      "target_type": "function",
+      "target_id": "fn_parse_user",
+      "rating_id": "rating_quality_4",
+      "author": "qa-team",
+      "comment": "Stable parsing logic for onboarding.",
+      "version": "1.0.0",
+      "revision": 1,
+      "effective_at": "2024-07-20T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-07-20T00:00:00Z",
+      "updated_at": "2024-07-20T00:00:00Z"
+    }
+  ]
+}

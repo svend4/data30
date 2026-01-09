@@ -47,6 +47,245 @@ paths:
     post:
       summary: Create dataset
       description: Creates a new dataset definition.
+  title: Function Registry API
+  version: 1.0.0
+  description: |
+    REST API для чтения/записи доменных сущностей (Function, Module, UseCase, Macro, Review, Rating)
+    с поддержкой истории изменений.
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /functions:
+    get:
+      summary: List functions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunctionList'
+    post:
+      summary: Create function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+  /functions/{functionId}:
+    get:
+      summary: Get function
+      parameters:
+        - $ref: '#/components/parameters/FunctionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+    put:
+      summary: Update function
+      parameters:
+        - $ref: '#/components/parameters/FunctionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+    delete:
+      summary: Delete function
+      parameters:
+        - $ref: '#/components/parameters/FunctionId'
+      responses:
+        '204':
+          description: Deleted
+  /functions/{functionId}/history:
+    get:
+      summary: Function change history
+      parameters:
+        - $ref: '#/components/parameters/FunctionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+  /modules:
+    get:
+      summary: List modules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleList'
+    post:
+      summary: Create module
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+  /modules/{moduleId}:
+    get:
+      summary: Get module
+      parameters:
+        - $ref: '#/components/parameters/ModuleId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+    put:
+      summary: Update module
+      parameters:
+        - $ref: '#/components/parameters/ModuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+    delete:
+      summary: Delete module
+      parameters:
+        - $ref: '#/components/parameters/ModuleId'
+      responses:
+        '204':
+          description: Deleted
+  /modules/{moduleId}/history:
+    get:
+      summary: Module change history
+      parameters:
+        - $ref: '#/components/parameters/ModuleId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+  /use-cases:
+    get:
+      summary: List use cases
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCaseList'
+    post:
+      summary: Create use case
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UseCase'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+  /use-cases/{useCaseId}:
+    get:
+      summary: Get use case
+      parameters:
+        - $ref: '#/components/parameters/UseCaseId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+    put:
+      summary: Update use case
+      parameters:
+        - $ref: '#/components/parameters/UseCaseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UseCase'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+    delete:
+      summary: Delete use case
+      parameters:
+        - $ref: '#/components/parameters/UseCaseId'
+      responses:
+        '204':
+          description: Deleted
+  /use-cases/{useCaseId}/history:
+    get:
+      summary: Use case change history
+      parameters:
+        - $ref: '#/components/parameters/UseCaseId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+  /macros:
+    get:
+      summary: List macros
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MacroList'
+    post:
+      summary: Create macro
       requestBody:
         required: true
         content:
@@ -73,3 +312,420 @@ paths:
                   name:
                     type: string
                     example: New dataset
+              $ref: '#/components/schemas/Macro'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Macro'
+  /macros/{macroId}:
+    get:
+      summary: Get macro
+      parameters:
+        - $ref: '#/components/parameters/MacroId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Macro'
+    put:
+      summary: Update macro
+      parameters:
+        - $ref: '#/components/parameters/MacroId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Macro'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Macro'
+    delete:
+      summary: Delete macro
+      parameters:
+        - $ref: '#/components/parameters/MacroId'
+      responses:
+        '204':
+          description: Deleted
+  /macros/{macroId}/history:
+    get:
+      summary: Macro change history
+      parameters:
+        - $ref: '#/components/parameters/MacroId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+  /reviews:
+    get:
+      summary: List reviews
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewList'
+    post:
+      summary: Create review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+  /reviews/{reviewId}:
+    get:
+      summary: Get review
+      parameters:
+        - $ref: '#/components/parameters/ReviewId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+    put:
+      summary: Update review
+      parameters:
+        - $ref: '#/components/parameters/ReviewId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+    delete:
+      summary: Delete review
+      parameters:
+        - $ref: '#/components/parameters/ReviewId'
+      responses:
+        '204':
+          description: Deleted
+  /reviews/{reviewId}/history:
+    get:
+      summary: Review change history
+      parameters:
+        - $ref: '#/components/parameters/ReviewId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+  /ratings:
+    get:
+      summary: List ratings
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingList'
+    post:
+      summary: Create rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rating'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+  /ratings/{ratingId}:
+    get:
+      summary: Get rating
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+    put:
+      summary: Update rating
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rating'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+    delete:
+      summary: Delete rating
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      responses:
+        '204':
+          description: Deleted
+  /ratings/{ratingId}/history:
+    get:
+      summary: Rating change history
+      parameters:
+        - $ref: '#/components/parameters/RatingId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryList'
+components:
+  parameters:
+    FunctionId:
+      name: functionId
+      in: path
+      required: true
+      schema:
+        type: string
+    ModuleId:
+      name: moduleId
+      in: path
+      required: true
+      schema:
+        type: string
+    UseCaseId:
+      name: useCaseId
+      in: path
+      required: true
+      schema:
+        type: string
+    MacroId:
+      name: macroId
+      in: path
+      required: true
+      schema:
+        type: string
+    ReviewId:
+      name: reviewId
+      in: path
+      required: true
+      schema:
+        type: string
+    RatingId:
+      name: ratingId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    BaseEntity:
+      type: object
+      required:
+        - id
+        - name
+        - version
+        - revision
+        - effective_at
+        - status
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        version:
+          type: string
+          example: 1.0.0
+        revision:
+          type: integer
+          example: 3
+        effective_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [draft, active, deprecated]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Function:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            signature:
+              type: string
+            module_ids:
+              type: array
+              items:
+                type: string
+    Module:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            owner:
+              type: string
+            function_ids:
+              type: array
+              items:
+                type: string
+    UseCase:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            module_ids:
+              type: array
+              items:
+                type: string
+            function_ids:
+              type: array
+              items:
+                type: string
+    Macro:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          properties:
+            use_case_ids:
+              type: array
+              items:
+                type: string
+    Review:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          required:
+            - target_type
+            - target_id
+            - rating_id
+          properties:
+            target_type:
+              type: string
+              enum: [function, module, use_case, macro]
+            target_id:
+              type: string
+            rating_id:
+              type: string
+            author:
+              type: string
+            comment:
+              type: string
+    Rating:
+      allOf:
+        - $ref: '#/components/schemas/BaseEntity'
+        - type: object
+          required:
+            - score
+          properties:
+            score:
+              type: integer
+              minimum: 1
+              maximum: 5
+            scale:
+              type: string
+            label:
+              type: string
+    HistoryEntry:
+      type: object
+      required:
+        - change_id
+        - entity_type
+        - entity_id
+        - revision
+        - changed_at
+        - change_type
+      properties:
+        change_id:
+          type: string
+        entity_type:
+          type: string
+          enum: [function, module, use_case, macro, review, rating]
+        entity_id:
+          type: string
+        revision:
+          type: integer
+        changed_at:
+          type: string
+          format: date-time
+        changed_by:
+          type: string
+        change_type:
+          type: string
+          enum: [create, update, delete]
+        diff:
+          type: object
+          additionalProperties: true
+    FunctionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Function'
+    ModuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Module'
+    UseCaseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UseCase'
+    MacroList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Macro'
+    ReviewList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Review'
+    RatingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rating'
+    HistoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HistoryEntry'
