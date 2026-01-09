@@ -1,0 +1,532 @@
+apps:
+  - id: slack
+    name: Slack
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Командные чаты и каналы
+      - Поиск по сообщениям и файлам
+      - Интеграции с инструментами разработки
+      - Автоматизация через workflow builder
+    compatibility: [jira, github, google-meet, zoom]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Командная коммуникация
+      - Оперативные уведомления
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Тарификация по пользователям с бесплатным уровнем."
+
+  - id: microsoft-teams
+    name: Microsoft Teams
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Чаты и видеозвонки
+      - Совместная работа с файлами
+      - Корпоративное управление доступом
+    compatibility: [jira, zoom, sharepoint, outlook]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Корпоративные коммуникации
+      - Видеовстречи
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Часто поставляется в составе Microsoft 365."
+
+  - id: zoom
+    name: Zoom
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Видеоконференции
+      - Вебинары
+      - Запись встреч
+    compatibility: [slack, microsoft-teams, google-calendar, outlook]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Видеовстречи
+      - Обучение и вебинары
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план с ограничением по времени."
+
+  - id: google-meet
+    name: Google Meet
+    platforms: [web, ios, android]
+    functions:
+      - Видеозвонки в браузере
+      - Совместные встречи из календаря
+      - Запись и транскрипция
+    compatibility: [google-calendar, slack, asana]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Видеозвонки
+      - Встречи с клиентами
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Доступен в Google Workspace."
+
+  - id: jira
+    name: Jira Software
+    platforms: [web]
+    functions:
+      - Планирование спринтов
+      - Управление бэклогом
+      - Отчеты по задачам
+    compatibility: [confluence, slack, github, bitbucket]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Управление разработкой
+      - Agile-процессы
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Облачные и серверные планы."
+
+  - id: trello
+    name: Trello
+    platforms: [web, ios, android]
+    functions:
+      - Канбан-доски
+      - Шаблоны проектов
+      - Автоматизация Butler
+    compatibility: [slack, google-drive, jira]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Визуальное управление задачами
+      - Личные и командные проекты
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план с ограничениями."
+
+  - id: asana
+    name: Asana
+    platforms: [web, ios, android]
+    functions:
+      - Управление задачами
+      - Таймлайны проектов
+      - Шаблоны рабочих процессов
+    compatibility: [slack, google-meet, zoom]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Проектное управление
+      - Кросс-функциональные проекты
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Есть бесплатный план для небольших команд."
+
+  - id: notion
+    name: Notion
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Документы и базы знаний
+      - Таблицы и базы данных
+      - Шаблоны рабочих пространств
+    compatibility: [slack, google-drive, github]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - База знаний
+      - Документация проектов
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план для личного использования."
+
+  - id: confluence
+    name: Confluence
+    platforms: [web]
+    functions:
+      - Документация команд
+      - Совместное редактирование
+      - Шаблоны страниц
+    compatibility: [jira, slack, google-drive]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - База знаний
+      - Документирование процессов
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Интеграция в экосистему Atlassian."
+
+  - id: github
+    name: GitHub
+    platforms: [web, desktop, cli, api]
+    functions:
+      - Хостинг репозиториев
+      - Code review
+      - CI/CD через GitHub Actions
+    compatibility: [jira, slack, notion]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Совместная разработка
+      - Автоматизация релизов
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Public-репозитории бесплатны."
+
+  - id: gitlab
+    name: GitLab
+    platforms: [web, cli, api]
+    functions:
+      - Репозитории и MR
+      - CI/CD pipelines
+      - Управление уязвимостями
+    compatibility: [jira, slack, kubernetes]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - DevSecOps
+      - CI/CD
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Есть self-managed варианты."
+
+  - id: bitbucket
+    name: Bitbucket
+    platforms: [web]
+    functions:
+      - Git-репозитории
+      - Pull requests
+      - CI/CD через Pipelines
+    compatibility: [jira, confluence]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Разработка в экосистеме Atlassian
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Поддержка малых команд."
+
+  - id: figma
+    name: Figma
+    platforms: [web, desktop]
+    functions:
+      - UI/UX дизайн
+      - Совместное редактирование
+      - Компонентные библиотеки
+    compatibility: [jira, github, notion]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Проектирование интерфейсов
+      - Дизайн-системы
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план для небольших команд."
+
+  - id: miro
+    name: Miro
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Онлайн-доски
+      - Шаблоны воркшопов
+      - Совместное рисование
+    compatibility: [slack, zoom, jira]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Воркшопы и ретроспективы
+      - Визуальные карты
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план с ограничениями по доскам."
+
+  - id: salesforce
+    name: Salesforce
+    platforms: [web, ios, android]
+    functions:
+      - CRM для продаж
+      - Управление лидами
+      - Отчеты и аналитика
+    compatibility: [slack, zoom, outlook]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Управление продажами
+      - CRM аналитика
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Энтерпрайз-настройки и кастомизация."
+
+  - id: hubspot
+    name: HubSpot
+    platforms: [web, ios, android]
+    functions:
+      - CRM и маркетинговые кампании
+      - Автоматизация писем
+      - Воронки продаж
+    compatibility: [slack, gmail, zoom]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Маркетинг и продажи
+      - Управление лидами
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Модули можно подключать по отдельности."
+
+  - id: zendesk
+    name: Zendesk
+    platforms: [web, ios, android]
+    functions:
+      - Тикетинг поддержки
+      - База знаний
+      - Омниканальные каналы
+    compatibility: [slack, salesforce, jira]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Служба поддержки
+      - Управление обращениями
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Интеграции с CRM и каналами поддержки."
+
+  - id: intercom
+    name: Intercom
+    platforms: [web, ios, android]
+    functions:
+      - Чат с клиентами
+      - Автоматизация поддержки
+      - Боты и help center
+    compatibility: [slack, zendesk, salesforce]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Customer success
+      - Чат поддержки
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Оплата за активных пользователей."
+
+  - id: stripe
+    name: Stripe
+    platforms: [web, api]
+    functions:
+      - Онлайн-платежи
+      - Подписки и инвойсы
+      - Управление рисками
+    compatibility: [shopify, salesforce, hubspot]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Прием платежей
+      - Управление подписками
+    licensing:
+      model: usage_based
+      license: commercial
+      cost: paid
+      notes: "Комиссия за транзакции."
+
+  - id: shopify
+    name: Shopify
+    platforms: [web, ios, android]
+    functions:
+      - Интернет-магазин
+      - Управление каталогом
+      - Встроенные платежи
+    compatibility: [stripe, mailchimp, google-analytics]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Электронная коммерция
+      - Запуск D2C брендов
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Дополнительные комиссии за платежи."
+
+  - id: mailchimp
+    name: Mailchimp
+    platforms: [web]
+    functions:
+      - Email-рассылки
+      - Сегментация аудитории
+      - Автоматизация маркетинга
+    compatibility: [shopify, salesforce, hubspot]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Email-маркетинг
+      - Поддержка e-commerce
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Бесплатный план до лимита контактов."
+
+  - id: google-drive
+    name: Google Drive
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Хранение файлов
+      - Совместный доступ
+      - Управление версиями
+    compatibility: [google-meet, slack, notion]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Обмен файлами
+      - Совместная работа
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Доступно в Google Workspace."
+
+  - id: gmail
+    name: Gmail
+    platforms: [web, ios, android]
+    functions:
+      - Электронная почта
+      - Интеграция с календарем
+      - Фильтры и ярлыки
+    compatibility: [hubspot, google-calendar, slack]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Почтовые коммуникации
+      - Работа с клиентами
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Бесплатная почта и корпоративные планы в Google Workspace."
+
+  - id: google-calendar
+    name: Google Calendar
+    platforms: [web, ios, android]
+    functions:
+      - Планирование встреч
+      - Напоминания
+      - Общие календари
+    compatibility: [zoom, google-meet, slack]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Планирование встреч
+      - Календарь команды
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Базовая версия бесплатна."
+
+  - id: outlook
+    name: Microsoft Outlook
+    platforms: [web, ios, android, desktop]
+    functions:
+      - Электронная почта
+      - Календарь и контакты
+      - Управление задачами
+    compatibility: [microsoft-teams, zoom, salesforce]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Корпоративная почта
+      - Планирование встреч
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Часть пакета Microsoft 365."
+
+  - id: sharepoint
+    name: SharePoint
+    platforms: [web]
+    functions:
+      - Корпоративные порталы
+      - Совместные сайты
+      - Управление документами
+    compatibility: [microsoft-teams, outlook]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Интранет и порталы
+      - Документооборот
+    licensing:
+      model: subscription
+      license: commercial
+      cost: tiered
+      notes: "Интеграция с Microsoft 365."
+
+  - id: kubernetes
+    name: Kubernetes
+    platforms: [api, cli]
+    functions:
+      - Оркестрация контейнеров
+      - Автоматическое масштабирование
+      - Самовосстановление сервисов
+    compatibility: [gitlab, github]
+    support_status: active
+    maturity: enterprise
+    use_cases:
+      - Управление инфраструктурой
+      - Микросервисные платформы
+    licensing:
+      model: open_source
+      license: Apache-2.0
+      cost: free
+      notes: "Открытое ПО, распространяется сообществом."
+
+  - id: google-analytics
+    name: Google Analytics
+    platforms: [web]
+    functions:
+      - Аналитика трафика
+      - Сегментация аудитории
+      - Отчеты и дашборды
+    compatibility: [shopify, google-drive]
+    support_status: active
+    maturity: stable
+    use_cases:
+      - Аналитика маркетинга
+      - Отчетность по трафику
+    licensing:
+      model: freemium
+      license: commercial
+      cost: tiered
+      notes: "Базовая версия бесплатна, есть платная 360."
