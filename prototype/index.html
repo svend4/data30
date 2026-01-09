@@ -74,19 +74,27 @@
 
       <section class="panel">
         <h2>3. Фильтры</h2>
-        <p class="muted">Отфильтруйте по стоимости, зрелости и интеграциям.</p>
-        <div class="grid three">
+        <p class="muted">Отфильтруйте и отсортируйте сценарии по стоимости, зрелости и интеграциям.</p>
+        <div class="grid four">
           <label class="field">
             <span>Стоимость</span>
             <input type="range" min="1" max="5" value="3" />
             <small>Сбалансированная стоимость</small>
           </label>
           <label class="field">
-            <span>Зрелость</span>
+            <span>Уровень зрелости</span>
             <select>
-              <option>MVP</option>
-              <option selected>Проверено</option>
-              <option>Масштабировано</option>
+              <option selected>Все уровни</option>
+              <option>Prototype</option>
+              <option>Stable</option>
+              <option>Recommended</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Сортировка по зрелости</span>
+            <select>
+              <option selected>От Prototype к Recommended</option>
+              <option>От Recommended к Prototype</option>
             </select>
           </label>
           <label class="field">
@@ -106,17 +114,26 @@
           <article class="card">
             <h3>Автоматизация повторяющихся обращений</h3>
             <p>Похожий сценарий с акцентом на автоответы и классификацию тикетов.</p>
-            <div class="meta">Схожесть 86% · Поддержка · Проверено</div>
+            <div class="meta-row">
+              <span class="meta">Схожесть 86% · Поддержка</span>
+              <span class="maturity-pill maturity-stable">Stable</span>
+            </div>
           </article>
           <article class="card">
             <h3>Маршрутизация запросов по SLA</h3>
             <p>Фокус на приоритетах и правилах распределения задач.</p>
-            <div class="meta">Схожесть 78% · Операции · Масштабировано</div>
+            <div class="meta-row">
+              <span class="meta">Схожесть 78% · Операции</span>
+              <span class="maturity-pill maturity-recommended">Recommended</span>
+            </div>
           </article>
           <article class="card">
             <h3>Сбор обратной связи после закрытия</h3>
             <p>Сценарий для повышения NPS и аналитики качества.</p>
-            <div class="meta">Схожесть 72% · Поддержка · MVP</div>
+            <div class="meta-row">
+              <span class="meta">Схожесть 72% · Поддержка</span>
+              <span class="maturity-pill maturity-prototype">Prototype</span>
+            </div>
           </article>
         </div>
       </section>
@@ -150,7 +167,10 @@
             <div>
               <h3>Сценарий: Автоматизация обработки тикетов</h3>
               <p>Рекомендован для входящих обращений с типовыми вопросами.</p>
-              <div class="meta">Стоимость: средняя · SLA: 4 часа · Интеграции: CRM, SD</div>
+              <div class="meta">
+                Стоимость: средняя · SLA: 4 часа · Интеграции: CRM, SD ·
+                <span class="maturity-pill maturity-stable">Stable</span>
+              </div>
             </div>
             <button class="secondary">Добавить</button>
           </article>
@@ -158,7 +178,10 @@
             <div>
               <h3>Сценарий: Классификация обращений по категории</h3>
               <p>Сокращает время распределения и повышает точность маршрутизации.</p>
-              <div class="meta">Стоимость: низкая · SLA: 2 часа · Интеграции: SD</div>
+              <div class="meta">
+                Стоимость: низкая · SLA: 2 часа · Интеграции: SD ·
+                <span class="maturity-pill maturity-prototype">Prototype</span>
+              </div>
             </div>
             <button class="secondary">Добавить</button>
           </article>
@@ -166,7 +189,10 @@
             <div>
               <h3>Сценарий: Отчеты по нагрузке и качеству</h3>
               <p>Подходит для аналитики пиков и перераспределения ресурсов.</p>
-              <div class="meta">Стоимость: средняя · SLA: 1 день · Интеграции: BI</div>
+              <div class="meta">
+                Стоимость: средняя · SLA: 1 день · Интеграции: BI ·
+                <span class="maturity-pill maturity-recommended">Recommended</span>
+              </div>
             </div>
             <button class="secondary">Добавить</button>
           </article>

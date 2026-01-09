@@ -9,7 +9,7 @@ apps:
       - Автоматизация через workflow builder
     compatibility: [jira, github, google-meet, zoom]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Командная коммуникация
       - Оперативные уведомления
@@ -28,7 +28,7 @@ apps:
       - Корпоративное управление доступом
     compatibility: [jira, zoom, sharepoint, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Корпоративные коммуникации
       - Видеовстречи
@@ -85,7 +85,7 @@ apps:
       - Отчеты по задачам
     compatibility: [confluence, slack, github, bitbucket]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление разработкой
       - Agile-процессы
@@ -161,7 +161,7 @@ apps:
       - Шаблоны страниц
     compatibility: [jira, slack, google-drive]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - База знаний
       - Документирование процессов
@@ -180,7 +180,7 @@ apps:
       - CI/CD через GitHub Actions
     compatibility: [jira, slack, notion]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Совместная разработка
       - Автоматизация релизов
@@ -199,7 +199,7 @@ apps:
       - Управление уязвимостями
     compatibility: [jira, slack, kubernetes]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - DevSecOps
       - CI/CD
@@ -236,7 +236,7 @@ apps:
       - Компонентные библиотеки
     compatibility: [jira, github, notion]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Проектирование интерфейсов
       - Дизайн-системы
@@ -274,7 +274,7 @@ apps:
       - Отчеты и аналитика
     compatibility: [slack, zoom, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление продажами
       - CRM аналитика
@@ -312,7 +312,7 @@ apps:
       - Омниканальные каналы
     compatibility: [slack, salesforce, jira]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Служба поддержки
       - Управление обращениями
@@ -350,7 +350,7 @@ apps:
       - Управление рисками
     compatibility: [shopify, salesforce, hubspot]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Прием платежей
       - Управление подписками
@@ -369,7 +369,7 @@ apps:
       - Встроенные платежи
     compatibility: [stripe, mailchimp, google-analytics]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Электронная коммерция
       - Запуск D2C брендов
@@ -464,7 +464,7 @@ apps:
       - Управление задачами
     compatibility: [microsoft-teams, zoom, salesforce]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Корпоративная почта
       - Планирование встреч
@@ -483,7 +483,7 @@ apps:
       - Управление документами
     compatibility: [microsoft-teams, outlook]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Интранет и порталы
       - Документооборот
@@ -502,7 +502,7 @@ apps:
       - Самовосстановление сервисов
     compatibility: [gitlab, github]
     support_status: active
-    maturity: enterprise
+    maturity: recommended
     use_cases:
       - Управление инфраструктурой
       - Микросервисные платформы

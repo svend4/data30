@@ -33,7 +33,7 @@
 - **Оркестрация:** планирование, запуск пайплайнов.
 
 ## 3. Метаданные
-- **Зрелость:** draft / beta / stable / deprecated.
+- **Зрелость:** Prototype / Stable / Recommended.
 - **Цена:** free / paid + модель (per call, per GB, per user).
 - **Совместимость:** версии API, поддерживаемые форматы и SDK.
 - **Ограничения:** лимиты размера, RPS, квоты.
@@ -52,7 +52,7 @@
 | Побочные эффекты | Запись/вызовы/изменение состояния |
 | Ошибки | Коды, форматы, условия |
 | Ограничения | Лимиты, квоты, RPS |
-| Зрелость | draft/beta/stable/deprecated |
+| Зрелость | Prototype/Stable/Recommended |
 | Цена | Модель тарификации |
 | Совместимость | Версии API, SDK, форматы |
 | SLA | Доступность, латентность |
@@ -77,7 +77,7 @@
     {"code": "VALIDATION_ERROR", "message": "invalid input"}
   ],
   "limits": {"max_length": 64, "rps": 100},
-  "maturity": "beta",
+  "maturity": "Prototype",
   "pricing": "free",
   "compatibility": {"api_versions": ["v1"], "formats": ["json"]},
   "sla": {"availability": "99.9%", "latency_p95_ms": 200},
@@ -103,7 +103,7 @@ errors:
 limits:
   max_length: 64
   rps: 100
-maturity: beta
+maturity: Prototype
 pricing: free
 compatibility:
   api_versions: [v1]
