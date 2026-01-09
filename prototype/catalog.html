@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MVP прототип — Каталог</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">MVP прототип</p>
+        <h1>Каталог сценариев</h1>
+        <p class="lead">Сравните сценарии, выберите фильтры и подготовьте подборку для рекомендации.</p>
+      </div>
+      <nav class="steps">
+        <a class="step" href="index.html">1. Вход</a>
+        <a class="step active" href="catalog.html">2. Каталог</a>
+        <a class="step" href="recommendation.html">3. Рекомендация</a>
+        <a class="step" href="confirmation.html">4. Подтверждение</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Фильтры и поиск</h2>
+        <p class="muted">Настройте параметры под команду и ожидаемый эффект.</p>
+        <div class="grid three">
+          <label class="field">
+            <span>Отдел</span>
+            <select>
+              <option>Поддержка</option>
+              <option>Продажи</option>
+              <option>Финансы</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Цель</span>
+            <input type="text" placeholder="Сократить SLA, повысить NPS" />
+          </label>
+          <label class="field">
+            <span>Зрелость</span>
+            <select>
+              <option>MVP</option>
+              <option selected>Проверено</option>
+              <option>Масштабировано</option>
+            </select>
+          </label>
+        </div>
+        <div class="chips">
+          <span class="chip">CRM интеграция</span>
+          <span class="chip">SLA &lt; 4 часа</span>
+          <span class="chip">Безопасность L2</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Сценарии</h2>
+        <div class="cards">
+          <article class="tile">
+            <h3>Автоматизация повторяющихся обращений</h3>
+            <p class="muted">Сокращает время обработки тикетов и снижает нагрузку.</p>
+            <div class="meta">Схожесть 86% · Поддержка · Проверено</div>
+            <button class="button-secondary" type="button">Добавить в подборку</button>
+          </article>
+          <article class="tile">
+            <h3>Маршрутизация запросов по SLA</h3>
+            <p class="muted">Фокус на приоритетах и распределении по очередям.</p>
+            <div class="meta">Схожесть 78% · Операции · Масштабировано</div>
+            <button class="button-secondary" type="button">Добавить в подборку</button>
+          </article>
+          <article class="tile">
+            <h3>Сбор обратной связи</h3>
+            <p class="muted">Автоматизирует NPS и отчетность по качеству.</p>
+            <div class="meta">Схожесть 72% · Поддержка · MVP</div>
+            <button class="button-secondary" type="button">Добавить в подборку</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Действия</h2>
+        <p class="muted">Подборка готова для формирования рекомендации.</p>
+        <div class="actions">
+          <a class="button" href="recommendation.html">Сформировать рекомендацию</a>
+          <a class="button-secondary" href="index.html">Выйти</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

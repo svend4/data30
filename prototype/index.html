@@ -3,173 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Прототип поиска сценариев</title>
+    <title>MVP прототип — Вход</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="page-header">
+    <header class="topbar">
       <div>
-        <p class="eyebrow">Поиск сценариев</p>
-        <h1>Поиск по функциям, сценариям и ограничениям</h1>
-        <p class="lead">
-          Прототип объединяет определение запроса пользователя, фильтры, рекомендации и блоки альтернатив.
-        </p>
+        <p class="eyebrow">MVP прототип</p>
+        <h1>Экран входа</h1>
+        <p class="lead">Проверьте доступ к каталогу сценариев и управляйте входом в систему.</p>
       </div>
-      <button class="primary">Создать подборку</button>
+      <nav class="steps">
+        <a class="step active" href="index.html">1. Вход</a>
+        <a class="step" href="catalog.html">2. Каталог</a>
+        <a class="step" href="recommendation.html">3. Рекомендация</a>
+        <a class="step" href="confirmation.html">4. Подтверждение</a>
+      </nav>
     </header>
 
-    <main class="layout">
-      <section class="panel">
-        <h2>1. Запрос пользователя</h2>
-        <p class="muted">Цель, входные данные и ограничения фиксируются перед поиском.</p>
+    <main class="container">
+      <section class="card">
+        <h2>Авторизация</h2>
+        <p class="muted">Введите корпоративную почту и пароль, чтобы перейти к подборке сценариев.</p>
         <div class="grid two">
           <label class="field">
-            <span>Цель запроса</span>
-            <input type="text" placeholder="Например: ускорить обработку заявок" />
+            <span>Электронная почта</span>
+            <input type="email" placeholder="name@company.com" />
           </label>
           <label class="field">
-            <span>Входные данные</span>
-            <input type="text" placeholder="CRM, Jira, почта" />
-          </label>
-          <label class="field">
-            <span>Ограничения</span>
-            <input type="text" placeholder="Бюджет, SLA, требования безопасности" />
-          </label>
-          <label class="field">
-            <span>Ответственный отдел</span>
-            <input type="text" placeholder="Продажи, поддержка, финансы" />
+            <span>Пароль</span>
+            <input type="password" placeholder="••••••••" />
           </label>
         </div>
-      </section>
-
-      <section class="panel">
-        <h2>2. Привязка к функциям и сценариям</h2>
-        <p class="muted">Определите бизнес-функцию и сценарии применения.</p>
         <div class="grid two">
           <label class="field">
-            <span>Функция</span>
+            <span>Роль</span>
             <select>
-              <option>Поддержка клиентов</option>
-              <option>Продажи</option>
-              <option>Финансовые операции</option>
-              <option>Маркетинг</option>
+              <option>Менеджер продукта</option>
+              <option>Операционный лидер</option>
+              <option>Аналитик</option>
             </select>
           </label>
           <label class="field">
-            <span>Сценарий</span>
-            <select>
-              <option>Автоматизация тикетов</option>
-              <option>Обогащение лидов</option>
-              <option>Сверка платежей</option>
-              <option>Подготовка отчетов</option>
-            </select>
+            <span>Домен</span>
+            <input type="text" placeholder="data30.internal" />
           </label>
         </div>
-        <div class="tags">
-          <span class="tag">SLA 4 часа</span>
-          <span class="tag">Только входящие каналы</span>
-          <span class="tag">Ручная проверка</span>
+        <div class="actions">
+          <a class="button" href="catalog.html">Войти и открыть каталог</a>
+          <button class="button-secondary" type="button">Восстановить доступ</button>
         </div>
       </section>
 
-      <section class="panel">
-        <h2>3. Фильтры</h2>
-        <p class="muted">Отфильтруйте по стоимости, зрелости и интеграциям.</p>
-        <div class="grid three">
-          <label class="field">
-            <span>Стоимость</span>
-            <input type="range" min="1" max="5" value="3" />
-            <small>Сбалансированная стоимость</small>
-          </label>
-          <label class="field">
-            <span>Зрелость</span>
-            <select>
-              <option>MVP</option>
-              <option selected>Проверено</option>
-              <option>Масштабировано</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Интеграции</span>
-            <div class="stack">
-              <label><input type="checkbox" checked /> CRM</label>
-              <label><input type="checkbox" /> ERP</label>
-              <label><input type="checkbox" checked /> Service Desk</label>
-            </div>
-          </label>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>4. Рекомендации по похожим сценариям</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Автоматизация повторяющихся обращений</h3>
-            <p>Похожий сценарий с акцентом на автоответы и классификацию тикетов.</p>
-            <div class="meta">Схожесть 86% · Поддержка · Проверено</div>
-          </article>
-          <article class="card">
-            <h3>Маршрутизация запросов по SLA</h3>
-            <p>Фокус на приоритетах и правилах распределения задач.</p>
-            <div class="meta">Схожесть 78% · Операции · Масштабировано</div>
-          </article>
-          <article class="card">
-            <h3>Сбор обратной связи после закрытия</h3>
-            <p>Сценарий для повышения NPS и аналитики качества.</p>
-            <div class="meta">Схожесть 72% · Поддержка · MVP</div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>5. Лучшие альтернативы и аналогичные макросы</h2>
-        <div class="grid two">
-          <div>
-            <h3>Лучшие альтернативы</h3>
-            <ul class="list">
-              <li>Гибридный сценарий с оператором на финальном шаге.</li>
-              <li>Чат-бот с расширенными формами сбора данных.</li>
-              <li>Интеграция с BI для мониторинга нагрузки.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Аналогичные макросы</h3>
-            <ul class="list">
-              <li>Шаблон автоответа с уточняющими вопросами.</li>
-              <li>Макрос для классификации по темам.</li>
-              <li>Макрос для эскалации в L2/L3.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>6. Результаты поиска</h2>
-        <div class="results">
-          <article>
-            <div>
-              <h3>Сценарий: Автоматизация обработки тикетов</h3>
-              <p>Рекомендован для входящих обращений с типовыми вопросами.</p>
-              <div class="meta">Стоимость: средняя · SLA: 4 часа · Интеграции: CRM, SD</div>
-            </div>
-            <button class="secondary">Добавить</button>
-          </article>
-          <article>
-            <div>
-              <h3>Сценарий: Классификация обращений по категории</h3>
-              <p>Сокращает время распределения и повышает точность маршрутизации.</p>
-              <div class="meta">Стоимость: низкая · SLA: 2 часа · Интеграции: SD</div>
-            </div>
-            <button class="secondary">Добавить</button>
-          </article>
-          <article>
-            <div>
-              <h3>Сценарий: Отчеты по нагрузке и качеству</h3>
-              <p>Подходит для аналитики пиков и перераспределения ресурсов.</p>
-              <div class="meta">Стоимость: средняя · SLA: 1 день · Интеграции: BI</div>
-            </div>
-            <button class="secondary">Добавить</button>
-          </article>
+      <section class="card">
+        <h2>Контроль доступа</h2>
+        <p class="muted">Подтверждение безопасности и готовности к работе с рекомендациями.</p>
+        <div class="summary">
+          <div>Последний вход: 04.10.2025, 18:45</div>
+          <div>Политика MFA: включена</div>
+          <div>Доступ к данным: чтение + создание подборок</div>
         </div>
       </section>
     </main>
