@@ -1,5 +1,6 @@
 # Перечень функций, сценариев и макросов
 
+## Перечень 58 функций
 ## Перечень 61 функций
 
 | № | Название функции | Описание | Входы | Выходы |
@@ -54,6 +55,14 @@
 | 48 | `import_data` | Импортирует данные из файла. | `entity`, `file`, `mode` | `import_id`, `status` |
 | 49 | `health_check` | Возвращает статус сервисов. | `scope` | `status`, `services[]` |
 | 50 | `get_system_metrics` | Возвращает системные метрики. | `from`, `to`, `metrics[]` | `series[]` |
+| 51 | `create_review` | Создает отзыв с привязкой к объекту и источнику. | `entity_type`, `entity_id`, `author_id`, `rating`, `text`, `source` | `review_id`, `created_at` |
+| 52 | `list_reviews` | Возвращает отзывы с фильтрами модерации. | `entity_type`, `entity_id`, `status`, `page` | `items[]`, `total` |
+| 53 | `detect_review_fraud` | Рассчитывает сигналы фрода и риск-скор. | `review_id` | `fraud_score`, `signals[]` |
+| 54 | `enqueue_review_moderation` | Помещает отзыв в очередь модерации. | `review_id`, `reason` | `queue_id`, `status` |
+| 55 | `list_moderation_queue` | Возвращает очередь модерации. | `filters`, `page` | `items[]`, `total` |
+| 56 | `moderate_review` | Выносит решение по отзыву (approve/reject). | `review_id`, `decision`, `moderator_id`, `note` | `review_id`, `status` |
+| 57 | `log_moderation_decision` | Логирует решение модерации для аудита. | `review_id`, `decision`, `moderator_id`, `metadata` | `log_id`, `created_at` |
+| 58 | `recalculate_ratings` | Пересчитывает рейтинг с учетом статусов отзывов. | `entity_type`, `entity_id` | `rating`, `updated_at` |
 | 51 | `track_funnel` | Отслеживает прохождение воронки. | `funnel_id`, `steps[]`, `user_id` | `status`, `conversion` |
 | 52 | `calculate_churn` | Рассчитывает отток пользователей. | `period`, `segment` | `churn_rate` |
 | 53 | `calculate_ltv` | Рассчитывает LTV по сегменту. | `segment`, `horizon` | `ltv` |
@@ -82,7 +91,7 @@
 - Проверить `expires_at` ≥ текущая дата.
 - В случае отсутствия подтверждения вернуть ошибку `usage_verification_required`.
 
-## 20 типовых сценариев использования
+## 23 типовых сценариев использования
 
 | № | Цель | Шаги | Ожидаемый результат |
 | --- | --- | --- | --- |
@@ -106,6 +115,9 @@
 | 18 | Просмотр аудита действий | 1) `list_audit_entries` по фильтру пользователя. | Список аудита получен. |
 | 19 | Мониторинг здоровья системы | 1) `health_check`. | Получен статус всех сервисов. |
 | 20 | Получение метрик за период | 1) `get_system_metrics` для `cpu`, `memory`. | Возвращены временные ряды метрик. |
+| 21 | Автоматическая фильтрация подозрительного отзыва | 1) `create_review`. 2) `detect_review_fraud`. 3) `enqueue_review_moderation`. | Отзыв в очереди модерации с расчетом сигналов. |
+| 22 | Ручная модерация отзыва | 1) `list_moderation_queue`. 2) `moderate_review`. 3) `log_moderation_decision`. | Отзыв получил статус, решение сохранено. |
+| 23 | Пересчет рейтинга после модерации | 1) `recalculate_ratings` по объекту. | Рейтинг пересчитан без отклоненных отзывов. |
 | 21 | Кампания возврата спящих пользователей | 1) `launch_campaign` по сегменту. 2) `create_in_app_message` с CTA. 3) `track_funnel` для оценки активации. | Пользователи возвращаются, конверсия измерена. |
 | 22 | Реферальное привлечение | 1) `create_referral_link`. 2) `create_notification` с ссылкой. | Создана ссылка, приглашения доставлены. |
 | 23 | Обращение в поддержку и контроль SLA | 1) `create_support_ticket`. 2) `create_alert_rule` для метрики времени ответа. | Тикет зарегистрирован, алерт контролирует SLA. |
