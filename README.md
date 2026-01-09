@@ -789,6 +789,11 @@ Resource-specific filters:
 - `templates/macros.yaml` — набор шаблонов макросов.
 - `docs/catalog/overview.md` — правила и назначение каталога приложений.
 - `docs/catalog/function-mapping.md` — привязка каталога к Function Dictionary.
+<<<<<<< 053jns-codex/check-repository
+- `docs/merge/conflict-resolution.md` — инструкция по разрешению конфликтов и git rerere.
+- `docs/merge/batch-merge.md` — инструкция по массовому слиянию веток.
+=======
+>>>>>>> main
 
 ## Планы и организационные документы
 
@@ -1174,6 +1179,8 @@ Resource-specific filters:
   - Частота использования макроса.
   - Оценка пользователей (CSAT/внутренние оценки).
 
+<<<<<<< 053jns-codex/check-repository
+=======
 ## 7. Инструкции по применению и настройке
 
 1. **Выберите макрос** из списка или каталога макросов и скопируйте JSON-шаблон.
@@ -1183,6 +1190,7 @@ Resource-specific filters:
 5. **Зарегистрируйте макрос** в хранилище (например, `macros/` или БД).
 6. **Запустите тестовый прогон** (dry-run) и проверьте логи `errors`/`result`.
 7. **Включите мониторинг** успешности и обновляйте параметры по метрикам.
+>>>>>>> main
 ## Карты бизнес‑сценариев
 
 Полная версия с 10 ключевыми сценариями перенесена в `docs/use-cases/cluster-maps.md`.
