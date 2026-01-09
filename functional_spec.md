@@ -10,6 +10,8 @@
 ## Перечень 50 функций (сгруппировано по темам)
 
 ### Пользователи и доступ
+## Перечень 58 функций
+## Перечень 61 функций
 
 | № | Название функции | Описание | Входы | Выходы |
 | --- | --- | --- | --- | --- |
@@ -103,8 +105,44 @@
 | 48 | `import_data` | Импортирует данные из файла. | `entity`, `file`, `mode` | `import_id`, `status` |
 | 49 | `health_check` | Возвращает статус сервисов. | `scope` | `status`, `services[]` |
 | 50 | `get_system_metrics` | Возвращает системные метрики. | `from`, `to`, `metrics[]` | `series[]` |
+| 51 | `create_review` | Создает отзыв с привязкой к объекту и источнику. | `entity_type`, `entity_id`, `author_id`, `rating`, `text`, `source` | `review_id`, `created_at` |
+| 52 | `list_reviews` | Возвращает отзывы с фильтрами модерации. | `entity_type`, `entity_id`, `status`, `page` | `items[]`, `total` |
+| 53 | `detect_review_fraud` | Рассчитывает сигналы фрода и риск-скор. | `review_id` | `fraud_score`, `signals[]` |
+| 54 | `enqueue_review_moderation` | Помещает отзыв в очередь модерации. | `review_id`, `reason` | `queue_id`, `status` |
+| 55 | `list_moderation_queue` | Возвращает очередь модерации. | `filters`, `page` | `items[]`, `total` |
+| 56 | `moderate_review` | Выносит решение по отзыву (approve/reject). | `review_id`, `decision`, `moderator_id`, `note` | `review_id`, `status` |
+| 57 | `log_moderation_decision` | Логирует решение модерации для аудита. | `review_id`, `decision`, `moderator_id`, `metadata` | `log_id`, `created_at` |
+| 58 | `recalculate_ratings` | Пересчитывает рейтинг с учетом статусов отзывов. | `entity_type`, `entity_id` | `rating`, `updated_at` |
+| 51 | `track_funnel` | Отслеживает прохождение воронки. | `funnel_id`, `steps[]`, `user_id` | `status`, `conversion` |
+| 52 | `calculate_churn` | Рассчитывает отток пользователей. | `period`, `segment` | `churn_rate` |
+| 53 | `calculate_ltv` | Рассчитывает LTV по сегменту. | `segment`, `horizon` | `ltv` |
+| 54 | `create_in_app_message` | Создает in-app сообщение для удержания. | `segment`, `title`, `body`, `cta` | `message_id` |
+| 55 | `launch_campaign` | Запускает кампанию роста. | `campaign_id`, `segment`, `channel` | `status` |
+| 56 | `create_referral_link` | Генерирует реферальную ссылку. | `user_id`, `offer` | `referral_link` |
+| 57 | `record_nps_score` | Сохраняет оценку NPS. | `user_id`, `score`, `comment` | `nps_id` |
+| 58 | `create_support_ticket` | Создает тикет в поддержку. | `user_id`, `subject`, `priority`, `channel` | `ticket_id` |
+| 59 | `update_support_ticket` | Обновляет тикет поддержки. | `ticket_id`, `status`, `assignee` | `ticket_id`, `status` |
+| 60 | `list_support_tickets` | Возвращает список тикетов. | `filters`, `page` | `items[]`, `total` |
+| 61 | `create_alert_rule` | Создает правило алерта по метрике. | `metric`, `threshold`, `window` | `alert_id` |
 
 ## 20 основных пользовательских сценариев
+## 23 типовых сценария использования
+## Дополнительные функции для отзывов и подтверждений
+
+| № | Название функции | Описание | Входы | Выходы |
+| --- | --- | --- | --- | --- |
+| 1 | `create_verified_usage` | Создает/обновляет запись подтвержденного использования. | `user_id`, `product_id`, `scenario_id`, `source`, `usage_count`, `verified_at`, `expires_at` | `verified_usage_id`, `status` |
+| 2 | `get_verified_usage` | Возвращает подтверждение по пользователю и сценарию. | `user_id`, `product_id`, `scenario_id` | `verified_usage` |
+| 3 | `create_review` | Создает отзыв, если есть активное подтверждение. | `user_id`, `product_id`, `scenario_id`, `quality_score`, `utility_score`, `comment` | `review_id`, `status` |
+| 4 | `list_reviews` | Возвращает отзывы с фильтрами. | `filters`, `page`, `page_size` | `items[]`, `total` |
+| 5 | `create_verification_audit` | Записывает аудит подтверждения использования. | `verified_usage_id`, `actor_id`, `action`, `reason` | `audit_id`, `created_at` |
+
+### Валидация `create_review`
+- Проверить наличие `verified_usage` по `(user_id, product_id, scenario_id)`.
+- Проверить `expires_at` ≥ текущая дата.
+- В случае отсутствия подтверждения вернуть ошибку `usage_verification_required`.
+
+## 23 типовых сценариев использования
 
 | № | Цель | Шаги | Ожидаемый результат |
 | --- | --- | --- | --- |
@@ -128,6 +166,12 @@
 | 18 | Просмотр аудита действий | 1) `list_audit_entries` по фильтру пользователя. | Список аудита получен. |
 | 19 | Мониторинг здоровья системы | 1) `health_check`. | Получен статус всех сервисов. |
 | 20 | Получение метрик за период | 1) `get_system_metrics` для `cpu`, `memory`. | Возвращены временные ряды метрик. |
+| 21 | Автоматическая фильтрация подозрительного отзыва | 1) `create_review`. 2) `detect_review_fraud`. 3) `enqueue_review_moderation`. | Отзыв в очереди модерации с расчетом сигналов. |
+| 22 | Ручная модерация отзыва | 1) `list_moderation_queue`. 2) `moderate_review`. 3) `log_moderation_decision`. | Отзыв получил статус, решение сохранено. |
+| 23 | Пересчет рейтинга после модерации | 1) `recalculate_ratings` по объекту. | Рейтинг пересчитан без отклоненных отзывов. |
+| 21 | Кампания возврата спящих пользователей | 1) `launch_campaign` по сегменту. 2) `create_in_app_message` с CTA. 3) `track_funnel` для оценки активации. | Пользователи возвращаются, конверсия измерена. |
+| 22 | Реферальное привлечение | 1) `create_referral_link`. 2) `create_notification` с ссылкой. | Создана ссылка, приглашения доставлены. |
+| 23 | Обращение в поддержку и контроль SLA | 1) `create_support_ticket`. 2) `create_alert_rule` для метрики времени ответа. | Тикет зарегистрирован, алерт контролирует SLA. |
 
 ## 10 макросов (шаблоны автоматизации)
 
@@ -150,6 +194,25 @@
 - **Ресурсы**: состав команды и доступность экспертов требуют фиксации в `integration_inventory.md`.
 - **Сроки**: в `timeline.md` отсутствуют оценки длительности и дат; необходимо заполнить базовые оценки и буферы, чтобы подтвердить реализуемость объема.
 - **Вывод**: текущий объем зафиксирован, но подтверждение сроков возможно только после заполнения оценок и ресурсов.
+## Мониторинг, метрики и поддержка пользователей
+
+- **Мониторинг**: метрики инфраструктуры и продукта собираются через `get_system_metrics` и события `track_funnel`, с правилами оповещений через `create_alert_rule`.
+- **Метрики продукта**: ретеншн/отток (`calculate_retention`, `calculate_churn`), LTV (`calculate_ltv`), NPS (`record_nps_score`).
+- **Поддержка**: регистрация и обработка обращений через `create_support_ticket` и `update_support_ticket`, контроль SLA алертами.
+
+## Сегменты аудитории и проверка поведения
+
+- **Новые пользователи**: проверка активации по воронке `track_funnel` (завершение онбординга ≤ 24 ч).
+- **Активные команды**: рост совместной активности (≥ 3 задачи/неделя на пользователя), стабильная ретенция.
+- **Спящие пользователи**: реактивация через `launch_campaign` и `create_in_app_message`, контроль конверсии.
+- **Платящие клиенты**: мониторинг LTV и риска оттока, приоритетный SLA поддержки.
+
+## Инфраструктурные требования
+
+- **Нагрузка**: расчет на пик 5–10k RPS по чтению, 1–2k RPS по записи; горизонтальное масштабирование API и очередей.
+- **Отказоустойчивость**: минимум 2 зоны доступности, репликация БД, автоматический failover ≤ 5 мин.
+- **Данные и бэкапы**: ежедневные снепшоты, RPO ≤ 15 мин, RTO ≤ 1 час.
+- **Наблюдаемость**: SLI/SLO для ключевых API, алерты по ошибкам 5xx и латентности p95.
 
 ## Формат хранения и правила именования
 
