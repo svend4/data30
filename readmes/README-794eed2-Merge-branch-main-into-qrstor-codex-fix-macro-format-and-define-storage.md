@@ -8,19 +8,6 @@
 - `docs/macros/guide.md` — руководство по использованию.
 - `schemas/macro.schema.json` — схема валидации.
 - `templates/macros.yaml` — набор шаблонов макросов.
-
-## Планы и организационные документы
-
-- `plans/plan-raci.md` — роли и RACI-матрица по этапам.
-- `plans/plan-dod.md` — план согласования и Definition of Done.
-- `plans/plan-roadmap.md` — план работ, оценки длительности и риски.
-- `plans/plan-prototype.md` — план прототипирования и ключевые экраны.
-- `plans/plan-session.md` — план сессии и рабочие договоренности.
-- `plans/plan-timeline.md` — таймлайн проекта и ключевые даты.
-
-## Архив README
-
-- `readmes/README-index.md` — индекс версий README.md из истории репозитория.
 ## Отзывы и рекомендации
 
 ### 1. Разделение оценок
