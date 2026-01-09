@@ -52,3 +52,7 @@ git merge origin/main
 # 3) add/commit
 ```
 
+## 5) Массовое слияние веток
+
+Для объединения десятков веток используйте `docs/merge/batch-merge.md` и скрипт
+`scripts/merge-branch.sh`.

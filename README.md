@@ -11,6 +11,7 @@
 - `docs/catalog/overview.md` — правила и назначение каталога приложений.
 - `docs/catalog/function-mapping.md` — привязка каталога к Function Dictionary.
 - `docs/merge/conflict-resolution.md` — инструкция по разрешению конфликтов и git rerere.
+- `docs/merge/batch-merge.md` — инструкция по массовому слиянию веток.
 
 ## Планы и организационные документы
 
