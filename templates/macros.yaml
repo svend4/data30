@@ -1,0 +1,956 @@
+version: "1.0"
+format: "macro-template"
+macros:
+  - id: "support_ticket_triage"
+    name: "Триаж входящих тикетов"
+    description: "Классифицирует тикеты и назначает приоритет и команду."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "ticket.created"
+      description: "Создание нового тикета в системе поддержки."
+    steps:
+      - id: "s1"
+        action: "read"
+        inputs:
+          source: "ticket"
+        outputs:
+          - "ticket.payload"
+        notes: "Собрать метаданные и текст обращения."
+      - id: "s2"
+        action: "classify"
+        inputs:
+          model: "{{classifier_model}}"
+          text: "{{ticket_text}}"
+        outputs:
+          - "ticket.category"
+          - "ticket.priority"
+      - id: "s3"
+        action: "assign"
+        inputs:
+          team: "{{routing_table}}"
+        outputs:
+          - "ticket.assignee"
+    conditions:
+      - id: "c1"
+        expression: "ticket.priority == 'high'"
+        on_true: "notify_oncall"
+        on_false: "noop"
+    errors:
+      - code: "E_NO_TEXT"
+        message: "Отсутствует текст тикета"
+        mitigation: "Запросить данные у пользователя и повторить"
+    result:
+      summary: "Тикет классифицирован и назначен"
+      artifacts:
+        - "ticket.category"
+        - "ticket.priority"
+      success_criteria:
+        - "Назначена команда"
+        - "Установлен приоритет"
+    parameters:
+      - name: "classifier_model"
+        type: "string"
+        required: true
+        default: "support-v1"
+        description: "Модель для классификации"
+        example: "support-v2"
+      - name: "routing_table"
+        type: "string"
+        required: true
+        description: "Идентификатор таблицы маршрутизации"
+        example: "routing_v3"
+      - name: "ticket_text"
+        type: "string"
+        required: true
+        description: "Текст обращения"
+        example: "Не могу войти в аккаунт"
+    reliability:
+      score: 0.78
+      confidence: "medium"
+      basis:
+        - "Проверен в пилоте на 200 тикетах"
+        - "Есть ручная проверка результатов"
+      last_reviewed: "2025-02-10"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.08
+        coverage: "partial"
+
+  - id: "invoice_reminder"
+    name: "Напоминание об оплате счета"
+    description: "Отправляет напоминания по неоплаченным счетам."
+    version: "1.0"
+    trigger:
+      type: "schedule"
+      event: "daily_09_00"
+      description: "Ежедневная проверка неоплаченных счетов."
+    steps:
+      - id: "s1"
+        action: "query"
+        inputs:
+          source: "billing"
+          filter: "status == 'overdue'"
+        outputs:
+          - "invoice.list"
+      - id: "s2"
+        action: "notify"
+        inputs:
+          channel: "email"
+          template: "{{email_template}}"
+        outputs:
+          - "delivery.report"
+    conditions:
+      - id: "c1"
+        expression: "invoice.list.count > 0"
+        on_true: "s2"
+        on_false: "noop"
+    errors:
+      - code: "E_NO_CONTACT"
+        message: "Не найден email клиента"
+        mitigation: "Создать задачу на обновление контакта"
+    result:
+      summary: "Клиентам отправлены напоминания"
+      artifacts:
+        - "delivery.report"
+      success_criteria:
+        - "Отправлено не менее 1 письма"
+    parameters:
+      - name: "email_template"
+        type: "string"
+        required: true
+        default: "overdue_v1"
+        description: "Шаблон письма"
+        example: "overdue_v2"
+    reliability:
+      score: 0.85
+      confidence: "high"
+      basis:
+        - "Автоматические отчеты по доставке"
+      last_reviewed: "2025-01-20"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.04
+        coverage: "full"
+
+  - id: "onboarding_checklist"
+    name: "Чеклист онбординга сотрудника"
+    description: "Создает задачи для нового сотрудника."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "employee.hired"
+      description: "Новый сотрудник добавлен в HR систему."
+    steps:
+      - id: "s1"
+        action: "create_tasks"
+        inputs:
+          template: "{{task_bundle}}"
+        outputs:
+          - "task.ids"
+      - id: "s2"
+        action: "notify"
+        inputs:
+          channel: "slack"
+          recipient: "{{manager_handle}}"
+        outputs:
+          - "notification.id"
+    conditions:
+      - id: "c1"
+        expression: "employee.location == 'remote'"
+        on_true: "add_remote_tasks"
+        on_false: "noop"
+    errors:
+      - code: "E_MISSING_MANAGER"
+        message: "Не указан руководитель"
+        mitigation: "Запросить данные в HR системе"
+    result:
+      summary: "Созданы задачи онбординга"
+      artifacts:
+        - "task.ids"
+      success_criteria:
+        - "Создано не менее 5 задач"
+    parameters:
+      - name: "task_bundle"
+        type: "string"
+        required: true
+        description: "Шаблон задач"
+        example: "onboarding_standard"
+      - name: "manager_handle"
+        type: "string"
+        required: true
+        description: "Контакт руководителя"
+        example: "@teamlead"
+    reliability:
+      score: 0.72
+      confidence: "medium"
+      basis:
+        - "Набор задач утвержден HR"
+      last_reviewed: "2025-02-05"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.1
+        coverage: "partial"
+
+  - id: "weekly_metrics"
+    name: "Еженедельный отчет по метрикам"
+    description: "Собирает KPI и отправляет отчет."
+    version: "1.0"
+    trigger:
+      type: "schedule"
+      event: "weekly_monday_09_00"
+      description: "Каждый понедельник утром."
+    steps:
+      - id: "s1"
+        action: "aggregate"
+        inputs:
+          sources: ["product", "sales", "support"]
+        outputs:
+          - "kpi.report"
+      - id: "s2"
+        action: "notify"
+        inputs:
+          channel: "email"
+          recipients: "{{report_recipients}}"
+          attachment: "kpi.report"
+        outputs:
+          - "delivery.report"
+    conditions:
+      - id: "c1"
+        expression: "kpi.report.is_complete == true"
+        on_true: "s2"
+        on_false: "alert_owner"
+    errors:
+      - code: "E_SOURCE_DOWN"
+        message: "Источник метрик недоступен"
+        mitigation: "Повторить сбор через 2 часа"
+    result:
+      summary: "Отчет отправлен"
+      artifacts:
+        - "kpi.report"
+      success_criteria:
+        - "Отчет доставлен получателям"
+    parameters:
+      - name: "report_recipients"
+        type: "array"
+        required: true
+        description: "Список получателей"
+        example: ["ceo@example.com"]
+    reliability:
+      score: 0.8
+      confidence: "medium"
+      basis:
+        - "Метрики собираются из трех источников"
+      last_reviewed: "2025-01-30"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.05
+        coverage: "partial"
+
+  - id: "incident_status_update"
+    name: "Обновление статуса инцидента"
+    description: "Публикует статус инцидента на статус-странице."
+    version: "1.0"
+    trigger:
+      type: "manual"
+      event: "incident.started"
+      description: "Ручной запуск SRE при инциденте."
+    steps:
+      - id: "s1"
+        action: "compose"
+        inputs:
+          template: "{{status_template}}"
+          details: "{{incident_details}}"
+        outputs:
+          - "status_message"
+      - id: "s2"
+        action: "publish"
+        inputs:
+          channel: "status_page"
+          message: "status_message"
+        outputs:
+          - "publish.id"
+    conditions:
+      - id: "c1"
+        expression: "incident.severity in ['sev1', 'sev2']"
+        on_true: "s2"
+        on_false: "notify_team"
+    errors:
+      - code: "E_TEMPLATE_MISSING"
+        message: "Не найден шаблон статуса"
+        mitigation: "Использовать дефолтный шаблон"
+    result:
+      summary: "Статус опубликован"
+      artifacts:
+        - "publish.id"
+      success_criteria:
+        - "Сообщение опубликовано"
+    parameters:
+      - name: "status_template"
+        type: "string"
+        required: true
+        description: "Шаблон для сообщения"
+        example: "incident_sev1"
+      - name: "incident_details"
+        type: "string"
+        required: true
+        description: "Краткие детали инцидента"
+        example: "Падение базы данных"
+    reliability:
+      score: 0.76
+      confidence: "medium"
+      basis:
+        - "Тестирован в тренировках"
+      last_reviewed: "2025-02-03"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.07
+        coverage: "partial"
+
+  - id: "contract_review"
+    name: "Проверка договора"
+    description: "Сверяет ключевые условия договора с чеклистом."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "contract.uploaded"
+      description: "Добавлен новый договор."
+    steps:
+      - id: "s1"
+        action: "extract"
+        inputs:
+          source: "document"
+        outputs:
+          - "contract.text"
+      - id: "s2"
+        action: "checklist"
+        inputs:
+          checklist: "{{legal_checklist}}"
+          text: "contract.text"
+        outputs:
+          - "issues.list"
+      - id: "s3"
+        action: "notify"
+        inputs:
+          channel: "email"
+          recipients: "{{legal_team}}"
+          attachment: "issues.list"
+        outputs:
+          - "delivery.report"
+    conditions:
+      - id: "c1"
+        expression: "issues.list.count > 0"
+        on_true: "s3"
+        on_false: "noop"
+    errors:
+      - code: "E_DOC_PARSE"
+        message: "Не удалось распознать документ"
+        mitigation: "Запросить скан в другом формате"
+    result:
+      summary: "Сформирован отчет по рискам"
+      artifacts:
+        - "issues.list"
+      success_criteria:
+        - "Отчет направлен юристам"
+    parameters:
+      - name: "legal_checklist"
+        type: "string"
+        required: true
+        description: "Идентификатор чеклиста"
+        example: "legal_v5"
+      - name: "legal_team"
+        type: "array"
+        required: true
+        description: "Список адресатов"
+        example: ["legal@example.com"]
+    reliability:
+      score: 0.69
+      confidence: "medium"
+      basis:
+        - "Требует ручной проверки"
+      last_reviewed: "2025-01-25"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.12
+        coverage: "partial"
+
+  - id: "marketing_brief"
+    name: "Подготовка маркетингового брифа"
+    description: "Собирает требования и создает бриф."
+    version: "1.0"
+    trigger:
+      type: "manual"
+      event: "brief.requested"
+      description: "Запрос от команды маркетинга."
+    brief_content:
+      target_segments:
+        - name: "SMB-маркетинг (1-10 человек в команде)"
+          description: "Небольшие B2B и e-commerce компании с коротким циклом сделки."
+          info_channels:
+            - "Поисковый трафик и обзоры (SEO, агрегаторы)"
+            - "YouTube/подкасты про маркетинг"
+            - "Telegram-каналы и профессиональные сообщества"
+            - "Рейтинги и отзывы на маркетплейсах"
+        - name: "Mid-market SaaS (команды роста/маркетинга)"
+          description: "Компании с устойчивой выручкой, фокус на LTV и масштабирование."
+          info_channels:
+            - "LinkedIn и профильные рассылки"
+            - "Вебинары, отраслевые конференции"
+            - "Комьюнити лидов роста и RevOps"
+            - "Аналитические отчеты и кейсы"
+        - name: "Enterprise (финансы, ретейл, телеком)"
+          description: "Крупные организации с длинным циклом закупки и закупочными комитетами."
+          info_channels:
+            - "Отраслевые аналитики и whitepaper"
+            - "Executive-мероприятия и отраслевые конференции"
+            - "Партнерские рекомендации (SI/консалтинг)"
+            - "Закупочные порталы и vendor shortlists"
+      channel_matrix:
+        - segment: "SMB-маркетинг (1-10 человек в команде)"
+          channels:
+            content:
+              format: "SEO-гайды, чек-листы, кейсы «как сделать»"
+              cac_hypothesis: "200-300 USD"
+              expected_mql_sql: "120/20 в месяц"
+              min_test_budget: "3 000 USD"
+            paid:
+              format: "Поиск, соцсети, ретаргетинг"
+              cac_hypothesis: "450-600 USD"
+              expected_mql_sql: "80/12 в месяц"
+              min_test_budget: "6 000 USD"
+            partners:
+              format: "Ко-маркетинг с агентствами, вебинары"
+              cac_hypothesis: "350-450 USD"
+              expected_mql_sql: "40/10 в месяц"
+              min_test_budget: "2 000 USD"
+            outbound:
+              format: "Email + LinkedIn-посев по сегменту"
+              cac_hypothesis: "700-900 USD"
+              expected_mql_sql: "30/8 в месяц"
+              min_test_budget: "2 000 USD"
+            product_led:
+              format: "Фри-триал, in-app подсказки, реферальный поток"
+              cac_hypothesis: "150-250 USD"
+              expected_mql_sql: "200/30 в месяц"
+              min_test_budget: "4 000 USD"
+        - segment: "Mid-market SaaS (команды роста/маркетинга)"
+          channels:
+            content:
+              format: "Отчеты, сравнительные обзоры, вебинары"
+              cac_hypothesis: "600-800 USD"
+              expected_mql_sql: "60/18 в месяц"
+              min_test_budget: "5 000 USD"
+            paid:
+              format: "LinkedIn ABM, поиск по high-intent"
+              cac_hypothesis: "1 200-1 600 USD"
+              expected_mql_sql: "35/12 в месяц"
+              min_test_budget: "12 000 USD"
+            partners:
+              format: "Интеграции и ко-продажи с платформами"
+              cac_hypothesis: "800-1 100 USD"
+              expected_mql_sql: "25/10 в месяц"
+              min_test_budget: "4 000 USD"
+            outbound:
+              format: "SDR-последовательности + ABM-каденсы"
+              cac_hypothesis: "1 800-2 200 USD"
+              expected_mql_sql: "20/8 в месяц"
+              min_test_budget: "6 000 USD"
+            product_led:
+              format: "Триал + onboarding с метриками ценности"
+              cac_hypothesis: "500-700 USD"
+              expected_mql_sql: "70/15 в месяц"
+              min_test_budget: "6 000 USD"
+        - segment: "Enterprise (финансы, ретейл, телеком)"
+          channels:
+            content:
+              format: "Whitepaper, ROI-кейсы, executive-briefings"
+              cac_hypothesis: "1 500-2 500 USD"
+              expected_mql_sql: "15/6 в месяц"
+              min_test_budget: "8 000 USD"
+            paid:
+              format: "ABM-display, LinkedIn enterprise-таргетинг"
+              cac_hypothesis: "4 000-6 000 USD"
+              expected_mql_sql: "8/4 в месяц"
+              min_test_budget: "20 000 USD"
+            partners:
+              format: "Рекомендации SI/консалтинга, совместные сделки"
+              cac_hypothesis: "2 500-3 500 USD"
+              expected_mql_sql: "10/5 в месяц"
+              min_test_budget: "7 000 USD"
+            outbound:
+              format: "Account-based outreach на закупочный комитет"
+              cac_hypothesis: "5 000-7 000 USD"
+              expected_mql_sql: "6/3 в месяц"
+              min_test_budget: "10 000 USD"
+            product_led:
+              format: "Sandbox + пилот с согласованными KPI"
+              cac_hypothesis: "2 000-3 000 USD"
+              expected_mql_sql: "12/4 в месяц"
+              min_test_budget: "12 000 USD"
+    steps:
+      - id: "s1"
+        action: "collect"
+        inputs:
+          questionnaire: "{{brief_form}}"
+        outputs:
+          - "brief.answers"
+      - id: "s2"
+        action: "compose"
+        inputs:
+          template: "{{brief_template}}"
+          data: "brief.answers"
+        outputs:
+          - "brief.document"
+    conditions:
+      - id: "c1"
+        expression: "brief.answers.complete == true"
+        on_true: "s2"
+        on_false: "request_missing"
+    errors:
+      - code: "E_FORM_INCOMPLETE"
+        message: "Не заполнены обязательные поля"
+        mitigation: "Отправить список недостающих данных"
+    result:
+      summary: "Бриф подготовлен"
+      artifacts:
+        - "brief.document"
+      success_criteria:
+        - "Документ создан"
+    parameters:
+      - name: "brief_form"
+        type: "string"
+        required: true
+        description: "Форма вопросов"
+        example: "brief_form_v2"
+      - name: "brief_template"
+        type: "string"
+        required: true
+        description: "Шаблон брифа"
+        example: "marketing_brief_v1"
+    reliability:
+      score: 0.7
+      confidence: "medium"
+      basis:
+        - "Часть данных собирается вручную"
+      last_reviewed: "2025-02-02"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.09
+        coverage: "partial"
+
+  - id: "knowledge_base_update"
+    name: "Обновление базы знаний"
+    description: "Добавляет статью на основе решения инцидента."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "incident.closed"
+      description: "Инцидент закрыт, требуется обновить базу знаний."
+    steps:
+      - id: "s1"
+        action: "summarize"
+        inputs:
+          source: "incident.report"
+        outputs:
+          - "article.draft"
+      - id: "s2"
+        action: "review"
+        inputs:
+          reviewer: "{{kb_reviewer}}"
+        outputs:
+          - "review.status"
+      - id: "s3"
+        action: "publish"
+        inputs:
+          channel: "kb"
+          content: "article.draft"
+        outputs:
+          - "article.id"
+    conditions:
+      - id: "c1"
+        expression: "review.status == 'approved'"
+        on_true: "s3"
+        on_false: "revise"
+    errors:
+      - code: "E_REVIEW_REJECTED"
+        message: "Рецензент отклонил статью"
+        mitigation: "Вернуться к доработке"
+    result:
+      summary: "Статья опубликована"
+      artifacts:
+        - "article.id"
+      success_criteria:
+        - "Статья доступна в базе знаний"
+    parameters:
+      - name: "kb_reviewer"
+        type: "string"
+        required: true
+        description: "Ответственный за проверку"
+        example: "@knowledge_owner"
+    reliability:
+      score: 0.74
+      confidence: "medium"
+      basis:
+        - "Есть обязательная проверка"
+      last_reviewed: "2025-02-08"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.08
+        coverage: "partial"
+
+  - id: "sales_lead_enrichment"
+    name: "Обогащение лида"
+    description: "Дополняет данные лида через внешние источники."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "lead.created"
+      description: "Создан новый лид в CRM."
+    steps:
+      - id: "s1"
+        action: "call_api"
+        inputs:
+          endpoint: "{{enrichment_api}}"
+          payload: "lead.profile"
+        outputs:
+          - "lead.enriched"
+      - id: "s2"
+        action: "update"
+        inputs:
+          target: "crm"
+          data: "lead.enriched"
+        outputs:
+          - "update.status"
+    conditions:
+      - id: "c1"
+        expression: "lead.enriched.score >= {{min_score}}"
+        on_true: "s2"
+        on_false: "flag_low_quality"
+    errors:
+      - code: "E_API_TIMEOUT"
+        message: "Таймаут запроса к API"
+        mitigation: "Повторить через 5 минут"
+    result:
+      summary: "Лид обогащен"
+      artifacts:
+        - "lead.enriched"
+      success_criteria:
+        - "Данные лида обновлены"
+    parameters:
+      - name: "enrichment_api"
+        type: "string"
+        required: true
+        description: "Endpoint сервиса обогащения"
+        example: "https://api.example.com/enrich"
+      - name: "min_score"
+        type: "number"
+        required: true
+        default: 0.6
+        description: "Минимальный скор качества"
+        example: 0.7
+    reliability:
+      score: 0.67
+      confidence: "low"
+      basis:
+        - "Зависимость от внешнего API"
+      last_reviewed: "2025-01-18"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.15
+        coverage: "partial"
+
+  - id: "shipment_tracking"
+    name: "Отслеживание доставки"
+    description: "Обновляет статус доставки и уведомляет клиента."
+    version: "1.0"
+    trigger:
+      type: "schedule"
+      event: "hourly"
+      description: "Периодическая проверка статуса доставок."
+    steps:
+      - id: "s1"
+        action: "query"
+        inputs:
+          source: "logistics"
+          filter: "status != 'delivered'"
+        outputs:
+          - "shipment.list"
+      - id: "s2"
+        action: "call_api"
+        inputs:
+          endpoint: "{{carrier_api}}"
+          payload: "shipment.list"
+        outputs:
+          - "shipment.status_updates"
+      - id: "s3"
+        action: "notify"
+        inputs:
+          channel: "sms"
+          template: "{{sms_template}}"
+        outputs:
+          - "delivery.report"
+    conditions:
+      - id: "c1"
+        expression: "shipment.status_updates.count > 0"
+        on_true: "s3"
+        on_false: "noop"
+    errors:
+      - code: "E_CARRIER_DOWN"
+        message: "Сервис перевозчика недоступен"
+        mitigation: "Повторить позже и уведомить логистику"
+    result:
+      summary: "Статусы доставок обновлены"
+      artifacts:
+        - "shipment.status_updates"
+      success_criteria:
+        - "Клиенты уведомлены"
+    parameters:
+      - name: "carrier_api"
+        type: "string"
+        required: true
+        description: "API перевозчика"
+        example: "https://carrier.example.com/status"
+      - name: "sms_template"
+        type: "string"
+        required: true
+        description: "Шаблон SMS"
+        example: "delivery_update_v1"
+    reliability:
+      score: 0.73
+      confidence: "medium"
+      basis:
+        - "Есть журнал ошибок перевозчика"
+      last_reviewed: "2025-02-06"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.09
+        coverage: "partial"
+
+  - id: "access_review"
+    name: "Квартальный пересмотр доступов"
+    description: "Собирает список доступов и отправляет на подтверждение."
+    version: "1.0"
+    trigger:
+      type: "schedule"
+      event: "quarterly"
+      description: "Ежеквартальный обзор прав доступа."
+    steps:
+      - id: "s1"
+        action: "export"
+        inputs:
+          source: "iam"
+        outputs:
+          - "access.list"
+      - id: "s2"
+        action: "notify"
+        inputs:
+          channel: "email"
+          recipients: "{{security_reviewers}}"
+          attachment: "access.list"
+        outputs:
+          - "delivery.report"
+    conditions:
+      - id: "c1"
+        expression: "access.list.count > 0"
+        on_true: "s2"
+        on_false: "noop"
+    errors:
+      - code: "E_EXPORT_FAILED"
+        message: "Экспорт доступов не выполнен"
+        mitigation: "Повторить экспорт и уведомить ИБ"
+    result:
+      summary: "Отчет по доступам отправлен"
+      artifacts:
+        - "access.list"
+      success_criteria:
+        - "Отчет доставлен"
+    parameters:
+      - name: "security_reviewers"
+        type: "array"
+        required: true
+        description: "Список ответственных"
+        example: ["security@example.com"]
+    reliability:
+      score: 0.81
+      confidence: "medium"
+      basis:
+        - "Регулярная процедура"
+      last_reviewed: "2025-01-15"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.05
+        coverage: "full"
+
+  - id: "content_publish"
+    name: "Публикация контента"
+    description: "Проверяет и публикует контент в CMS."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "content.ready"
+      description: "Контент готов к публикации."
+    steps:
+      - id: "s1"
+        action: "review"
+        inputs:
+          reviewer: "{{editor}}"
+        outputs:
+          - "review.status"
+      - id: "s2"
+        action: "publish"
+        inputs:
+          channel: "cms"
+          content: "{{content_id}}"
+        outputs:
+          - "publish.id"
+    conditions:
+      - id: "c1"
+        expression: "review.status == 'approved'"
+        on_true: "s2"
+        on_false: "request_changes"
+    errors:
+      - code: "E_REVIEW_DELAY"
+        message: "Рецензия не выполнена вовремя"
+        mitigation: "Напомнить редактору"
+    result:
+      summary: "Контент опубликован"
+      artifacts:
+        - "publish.id"
+      success_criteria:
+        - "Страница доступна в CMS"
+    parameters:
+      - name: "editor"
+        type: "string"
+        required: true
+        description: "Ответственный редактор"
+        example: "@editor"
+      - name: "content_id"
+        type: "string"
+        required: true
+        description: "ID контента"
+        example: "post_123"
+    reliability:
+      score: 0.77
+      confidence: "medium"
+      basis:
+        - "Есть SLA на проверку"
+      last_reviewed: "2025-02-04"
+      signals:
+        automation_level: "semi"
+        failure_rate: 0.07
+        coverage: "partial"
+
+  - id: "customer_nps"
+    name: "Сбор NPS"
+    description: "Отправляет опрос NPS после завершения заказа."
+    version: "1.0"
+    trigger:
+      type: "event"
+      event: "order.completed"
+      description: "Заказ завершен и доставлен."
+    steps:
+      - id: "s1"
+        action: "notify"
+        inputs:
+          channel: "email"
+          template: "{{nps_template}}"
+        outputs:
+          - "delivery.report"
+      - id: "s2"
+        action: "collect"
+        inputs:
+          source: "survey"
+        outputs:
+          - "nps.score"
+    conditions:
+      - id: "c1"
+        expression: "order.total > {{min_order_total}}"
+        on_true: "s1"
+        on_false: "noop"
+    errors:
+      - code: "E_SURVEY_FAIL"
+        message: "Опрос не отправлен"
+        mitigation: "Проверить SMTP и повторить"
+    result:
+      summary: "NPS собран"
+      artifacts:
+        - "nps.score"
+      success_criteria:
+        - "Получен ответ клиента"
+    parameters:
+      - name: "nps_template"
+        type: "string"
+        required: true
+        description: "Шаблон письма NPS"
+        example: "nps_v1"
+      - name: "min_order_total"
+        type: "number"
+        required: true
+        default: 1000
+        description: "Минимальная сумма заказа"
+        example: 1500
+    reliability:
+      score: 0.71
+      confidence: "medium"
+      basis:
+        - "Метрика зависит от открываемости"
+      last_reviewed: "2025-01-28"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.1
+        coverage: "partial"
+
+  - id: "data_retention_cleanup"
+    name: "Очистка данных по сроку хранения"
+    description: "Удаляет записи по правилам хранения данных."
+    version: "1.0"
+    trigger:
+      type: "schedule"
+      event: "monthly"
+      description: "Плановое удаление устаревших данных."
+    steps:
+      - id: "s1"
+        action: "query"
+        inputs:
+          source: "data_warehouse"
+          filter: "retention_expired == true"
+        outputs:
+          - "records.list"
+      - id: "s2"
+        action: "delete"
+        inputs:
+          target: "data_warehouse"
+          items: "records.list"
+        outputs:
+          - "delete.report"
+    conditions:
+      - id: "c1"
+        expression: "records.list.count > 0"
+        on_true: "s2"
+        on_false: "noop"
+    errors:
+      - code: "E_DELETE_FAILED"
+        message: "Удаление не выполнено"
+        mitigation: "Остановить процесс и уведомить владельца данных"
+    result:
+      summary: "Устаревшие данные удалены"
+      artifacts:
+        - "delete.report"
+      success_criteria:
+        - "Удалено 100% записей"
+    parameters:
+      - name: "retention_policy"
+        type: "string"
+        required: true
+        description: "Идентификатор политики хранения"
+        example: "retention_v2"
+    reliability:
+      score: 0.83
+      confidence: "high"
+      basis:
+        - "Автоматическая проверка логов"
+      last_reviewed: "2025-01-12"
+      signals:
+        automation_level: "auto"
+        failure_rate: 0.03
+        coverage: "full"
