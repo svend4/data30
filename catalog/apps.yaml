@@ -7,17 +7,26 @@ apps:
       - Поиск по сообщениям и файлам
       - Интеграции с инструментами разработки
       - Автоматизация через workflow builder
+    limitations:
+      - Ограниченная история сообщений на бесплатном плане
+      - Зависимость от интернет-соединения
     constraints:
       - Ограничение истории сообщений в бесплатном плане.
     price: tiered
     documentation:
       - https://slack.com/help
     compatibility: [jira, github, google-meet, zoom]
+    dependencies: []
+    support:
+      update_frequency: weekly
+      sla: "99.99% (enterprise)"
+      docs: "https://api.slack.com/docs"
     support_status: active
     maturity: recommended
     use_cases:
       - Командная коммуникация
       - Оперативные уведомления
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -31,17 +40,26 @@ apps:
       - Чаты и видеозвонки
       - Совместная работа с файлами
       - Корпоративное управление доступом
+    limitations:
+      - Зависимость от Microsoft 365 для полного набора функций
+      - Ограничения гостевого доступа в некоторых планах
     constraints:
       - Требуется учетная запись Microsoft 365 для расширенных функций.
     price: tiered
     documentation:
       - https://learn.microsoft.com/microsoftteams/
     compatibility: [jira, zoom, sharepoint, outlook]
+    dependencies: [microsoft-365]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Microsoft 365)"
+      docs: "https://learn.microsoft.com/microsoftteams/"
     support_status: active
     maturity: recommended
     use_cases:
       - Корпоративные коммуникации
       - Видеовстречи
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -55,17 +73,26 @@ apps:
       - Видеоконференции
       - Вебинары
       - Запись встреч
+    limitations:
+      - Ограничение длительности встреч на бесплатном плане
+      - Требуются отдельные лицензии для вебинаров
     constraints:
       - Лимит времени в бесплатных групповых встречах.
     price: tiered
     documentation:
       - https://support.zoom.com/
     compatibility: [slack, microsoft-teams, google-calendar, outlook]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://developers.zoom.us/docs/"
     support_status: active
     maturity: stable
     use_cases:
       - Видеовстречи
       - Обучение и вебинары
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -78,18 +105,26 @@ apps:
     functions:
       - Видеозвонки в браузере
       - Совместные встречи из календаря
-      - Запись и транскрипция
+      - Запись и транскрипция   limitations:
+      - Запись доступна в платных планах
+      - Требуется аккаунт Google Workspace для расширенных функций
     constraints:
       - Запись и транскрипция доступны в Google Workspace.
     price: tiered
     documentation:
       - https://support.google.com/meet/
     compatibility: [google-calendar, slack, asana]
+    dependencies: [google-workspace]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Google Workspace)"
+      docs: "https://developers.google.com/meet"
     support_status: active
     maturity: stable
     use_cases:
       - Видеозвонки
       - Встречи с клиентами
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -103,17 +138,26 @@ apps:
       - Планирование спринтов
       - Управление бэклогом
       - Отчеты по задачам
+    limitations:
+      - Платные функции продвинутой автоматизации
+      - Сложность настройки без администратора
     constraints:
       - Настройка рабочих процессов требует администрирования.
     price: tiered
     documentation:
       - https://support.atlassian.com/jira-software-cloud/
     compatibility: [confluence, slack, github, bitbucket]
+    dependencies: [atlassian-cloud]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Premium)"
+      docs: "https://developer.atlassian.com/cloud/jira/platform/"
     support_status: active
     maturity: recommended
     use_cases:
       - Управление разработкой
       - Agile-процессы
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -127,17 +171,26 @@ apps:
       - Канбан-доски
       - Шаблоны проектов
       - Автоматизация Butler
+    limitations:
+      - Лимиты на автоматизацию в бесплатном плане
+      - Ограниченные права доступа без бизнес-плана
     constraints:
       - Ограничения по автоматизациям в бесплатном плане.
     price: tiered
     documentation:
       - https://support.atlassian.com/trello/
     compatibility: [slack, google-drive, jira]
+    dependencies: [atlassian-cloud]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Enterprise)"
+      docs: "https://developer.atlassian.com/cloud/trello/"
     support_status: active
     maturity: stable
     use_cases:
       - Визуальное управление задачами
       - Личные и командные проекты
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -151,17 +204,26 @@ apps:
       - Управление задачами
       - Таймлайны проектов
       - Шаблоны рабочих процессов
+    limitations:
+      - Продвинутая отчетность в платных планах
+      - Лимиты на портфели в бесплатном плане
     constraints:
       - Таймлайны и расширенные отчеты доступны в платных планах.
     price: tiered
     documentation:
       - https://help.asana.com/
     compatibility: [slack, google-meet, zoom]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://developers.asana.com/docs"
     support_status: active
     maturity: stable
     use_cases:
       - Проектное управление
       - Кросс-функциональные проекты
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -175,17 +237,26 @@ apps:
       - Документы и базы знаний
       - Таблицы и базы данных
       - Шаблоны рабочих пространств
+    limitations:
+      - Ограничения на размер загрузки файлов в бесплатном плане
+      - Ограниченная офлайн-доступность
     constraints:
       - Лимиты на гостей и загрузки в бесплатном плане.
     price: tiered
     documentation:
       - https://www.notion.so/help
     compatibility: [slack, google-drive, github]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.5%"
+      docs: "https://developers.notion.com/docs"
     support_status: active
     maturity: stable
     use_cases:
       - База знаний
       - Документация проектов
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -199,17 +270,26 @@ apps:
       - Документация команд
       - Совместное редактирование
       - Шаблоны страниц
+    limitations:
+      - Расширенные функции аналитики в платных тарифах
+      - Требует администрирования для больших команд
     constraints:
       - Расширенные функции управления доступны в платных планах.
     price: tiered
     documentation:
       - https://support.atlassian.com/confluence-cloud/
     compatibility: [jira, slack, google-drive]
+    dependencies: [atlassian-cloud]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Premium)"
+      docs: "https://developer.atlassian.com/cloud/confluence/"
     support_status: active
     maturity: recommended
     use_cases:
       - База знаний
       - Документирование процессов
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -223,17 +303,26 @@ apps:
       - Хостинг репозиториев
       - Code review
       - CI/CD через GitHub Actions
+    limitations:
+      - Ограничения на приватные репозитории в бесплатном плане
+      - Лимиты минут CI/CD в бесплатных планах
     constraints:
       - Лимиты на действия и пользователей зависят от плана.
     price: tiered
     documentation:
       - https://docs.github.com/
     compatibility: [jira, slack, notion]
+    dependencies: []
+    support:
+      update_frequency: weekly
+      sla: "99.95% (Enterprise)"
+      docs: "https://docs.github.com"
     support_status: active
     maturity: recommended
     use_cases:
       - Совместная разработка
       - Автоматизация релизов
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -247,17 +336,26 @@ apps:
       - Репозитории и MR
       - CI/CD pipelines
       - Управление уязвимостями
+    limitations:
+      - Расширенные security-функции в платных планах
+      - Требуются ресурсы для self-managed инстансов
     constraints:
       - Расширенные security-функции доступны в платных планах.
     price: tiered
     documentation:
       - https://docs.gitlab.com/
     compatibility: [jira, slack, kubernetes]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9% (SaaS)"
+      docs: "https://docs.gitlab.com"
     support_status: active
     maturity: recommended
     use_cases:
       - DevSecOps
       - CI/CD
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -271,16 +369,25 @@ apps:
       - Git-репозитории
       - Pull requests
       - CI/CD через Pipelines
+    limitations:
+      - Ограничение минут CI/CD в бесплатном плане
+      - Основные интеграции в экосистеме Atlassian
     constraints:
       - Лимиты по пользователям в бесплатном плане.
     price: tiered
     documentation:
       - https://support.atlassian.com/bitbucket-cloud/
     compatibility: [jira, confluence]
+    dependencies: [atlassian-cloud]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Premium)"
+      docs: "https://developer.atlassian.com/cloud/bitbucket/"
     support_status: active
     maturity: stable
     use_cases:
       - Разработка в экосистеме Atlassian
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -294,17 +401,26 @@ apps:
       - UI/UX дизайн
       - Совместное редактирование
       - Компонентные библиотеки
+    limitations:
+      - Ограничение числа файлов в бесплатном плане
+      - Требуется интернет для совместной работы
     constraints:
       - Ограничения по командным библиотекам в бесплатном плане.
     price: tiered
     documentation:
       - https://help.figma.com/
     compatibility: [jira, github, notion]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Enterprise)"
+      docs: "https://www.figma.com/developers/api"
     support_status: active
     maturity: recommended
     use_cases:
       - Проектирование интерфейсов
       - Дизайн-системы
+    price: freemium
     licensing:
       model: subscription
       license: commercial
@@ -318,17 +434,26 @@ apps:
       - Онлайн-доски
       - Шаблоны воркшопов
       - Совместное рисование
+    limitations:
+      - Ограничение числа досок в бесплатном плане
+      - Расширенная безопасность в enterprise-плане
     constraints:
       - Ограничения по количеству досок в бесплатном плане.
     price: tiered
     documentation:
       - https://help.miro.com/
     compatibility: [slack, zoom, jira]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://developers.miro.com/docs"
     support_status: active
     maturity: stable
     use_cases:
       - Воркшопы и ретроспективы
       - Визуальные карты
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -342,17 +467,26 @@ apps:
       - CRM для продаж
       - Управление лидами
       - Отчеты и аналитика
+    limitations:
+      - Высокая стоимость внедрения
+      - Требуются администраторы для настройки
     constraints:
       - Доступ к основным модулям зависит от лицензии.
     price: tiered
     documentation:
       - https://help.salesforce.com/
     compatibility: [slack, zoom, outlook]
+    dependencies: []
+    support:
+      update_frequency: quarterly
+      sla: "99.9%"
+      docs: "https://developer.salesforce.com/docs"
     support_status: active
     maturity: recommended
     use_cases:
       - Управление продажами
       - CRM аналитика
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -366,17 +500,26 @@ apps:
       - CRM и маркетинговые кампании
       - Автоматизация писем
       - Воронки продаж
+    limitations:
+      - Расширенные automation-функции в платных планах
+      - Стоимость растет с объемом базы
     constraints:
       - Автоматизация и отчеты расширяются в платных пакетах.
     price: tiered
     documentation:
       - https://knowledge.hubspot.com/
     compatibility: [slack, gmail, zoom]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://developers.hubspot.com/docs"
     support_status: active
     maturity: stable
     use_cases:
       - Маркетинг и продажи
       - Управление лидами
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -390,17 +533,26 @@ apps:
       - Тикетинг поддержки
       - База знаний
       - Омниканальные каналы
+    limitations:
+      - SLA и продвинутые отчеты в enterprise-планах
+      - Требуется настройка workflow
     constraints:
       - Омниканальные функции доступны в старших планах.
     price: tiered
     documentation:
       - https://support.zendesk.com/
     compatibility: [slack, salesforce, jira]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.95%"
+      docs: "https://developer.zendesk.com/api-reference/"
     support_status: active
     maturity: recommended
     use_cases:
       - Служба поддержки
       - Управление обращениями
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -414,17 +566,26 @@ apps:
       - Чат с клиентами
       - Автоматизация поддержки
       - Боты и help center
+    limitations:
+      - Оплата за активных пользователей
+      - Некоторые модули доступны как аддоны
     constraints:
       - Стоимость зависит от числа активных пользователей.
     price: tiered
     documentation:
       - https://www.intercom.com/help
     compatibility: [slack, zendesk, salesforce]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://developers.intercom.com/intercom-api-reference"
     support_status: active
     maturity: stable
     use_cases:
       - Customer success
       - Чат поддержки
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -438,17 +599,26 @@ apps:
       - Онлайн-платежи
       - Подписки и инвойсы
       - Управление рисками
+    limitations:
+      - Комиссия за транзакции
+      - Доступность зависит от страны
     constraints:
       - Комиссии за транзакции и ограничения по регионам.
     price: paid
     documentation:
       - https://stripe.com/docs
     compatibility: [shopify, salesforce, hubspot]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://stripe.com/docs/api"
     support_status: active
     maturity: recommended
     use_cases:
       - Прием платежей
       - Управление подписками
+    price: paid
     licensing:
       model: usage_based
       license: commercial
@@ -462,17 +632,26 @@ apps:
       - Интернет-магазин
       - Управление каталогом
       - Встроенные платежи
+    limitations:
+      - Комиссия за внешние платежные шлюзы
+      - Ограниченная кастомизация без приложений
     constraints:
       - Комиссии за платежи и транзакции зависят от плана.
     price: tiered
     documentation:
       - https://help.shopify.com/
     compatibility: [stripe, mailchimp, google-analytics]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://shopify.dev/docs"
     support_status: active
     maturity: recommended
     use_cases:
       - Электронная коммерция
       - Запуск D2C брендов
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -486,17 +665,26 @@ apps:
       - Email-рассылки
       - Сегментация аудитории
       - Автоматизация маркетинга
+    limitations:
+      - Лимиты на число контактов в бесплатном плане
+      - Расширенная аналитика в платных тарифах
     constraints:
       - Лимиты по контактам и отправкам в бесплатном плане.
     price: tiered
     documentation:
       - https://mailchimp.com/help/
     compatibility: [shopify, salesforce, hubspot]
+    dependencies: []
+    support:
+      update_frequency: monthly
+      sla: "99.9%"
+      docs: "https://mailchimp.com/developer/"
     support_status: active
     maturity: stable
     use_cases:
       - Email-маркетинг
       - Поддержка e-commerce
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -510,17 +698,26 @@ apps:
       - Хранение файлов
       - Совместный доступ
       - Управление версиями
+    limitations:
+      - Ограниченный объем хранения в бесплатном плане
+      - Требуется Google аккаунт
     constraints:
       - Квоты хранения зависят от тарифа.
     price: tiered
     documentation:
       - https://support.google.com/drive/
     compatibility: [google-meet, slack, notion]
+    dependencies: [google-workspace]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Google Workspace)"
+      docs: "https://developers.google.com/drive"
     support_status: active
     maturity: stable
     use_cases:
       - Обмен файлами
       - Совместная работа
+    price: freemium
     licensing:
       model: subscription
       license: commercial
@@ -534,17 +731,26 @@ apps:
       - Электронная почта
       - Интеграция с календарем
       - Фильтры и ярлыки
+    limitations:
+      - Ограничения на объем письма и вложений
+      - Корпоративные функции доступны в Google Workspace
     constraints:
       - Лимиты отправки писем в сутки.
     price: tiered
     documentation:
       - https://support.google.com/mail/
     compatibility: [hubspot, google-calendar, slack]
+    dependencies: [google-workspace]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Google Workspace)"
+      docs: "https://developers.google.com/gmail/api"
     support_status: active
     maturity: stable
     use_cases:
       - Почтовые коммуникации
       - Работа с клиентами
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -558,17 +764,26 @@ apps:
       - Планирование встреч
       - Напоминания
       - Общие календари
+    limitations:
+      - Ограниченная аналитика календаря
+      - Расширенные функции доступны в Workspace
     constraints:
       - Расширенные функции доступны в Google Workspace.
     price: tiered
     documentation:
       - https://support.google.com/calendar/
     compatibility: [zoom, google-meet, slack]
+    dependencies: [google-workspace]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Google Workspace)"
+      docs: "https://developers.google.com/calendar"
     support_status: active
     maturity: stable
     use_cases:
       - Планирование встреч
       - Календарь команды
+    price: freemium
     licensing:
       model: freemium
       license: commercial
@@ -582,17 +797,26 @@ apps:
       - Электронная почта
       - Календарь и контакты
       - Управление задачами
+    limitations:
+      - Часть функций доступна только в Microsoft 365
+      - Ограничения на объем ящика в бесплатной версии
     constraints:
       - Бизнес-функции доступны в планах Microsoft 365.
     price: tiered
     documentation:
       - https://support.microsoft.com/outlook
     compatibility: [microsoft-teams, zoom, salesforce]
+    dependencies: [microsoft-365]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (Microsoft 365)"
+      docs: "https://learn.microsoft.com/graph/api/resources/mail-api-overview"
     support_status: active
     maturity: recommended
     use_cases:
       - Корпоративная почта
       - Планирование встреч
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -606,17 +830,26 @@ apps:
       - Корпоративные порталы
       - Совместные сайты
       - Управление документами
+    limitations:
+      - Требуется настройка и администрирование
+      - Полный функционал в Microsoft 365
     constraints:
       - Требуется лицензия Microsoft 365.
     price: tiered
     documentation:
       - https://support.microsoft.com/sharepoint
     compatibility: [microsoft-teams, outlook]
+    dependencies: [microsoft-365]
+    support:
+      update_frequency: quarterly
+      sla: "99.9% (Microsoft 365)"
+      docs: "https://learn.microsoft.com/sharepoint/"
     support_status: active
     maturity: recommended
     use_cases:
       - Интранет и порталы
       - Документооборот
+    price: tiered
     licensing:
       model: subscription
       license: commercial
@@ -630,17 +863,26 @@ apps:
       - Оркестрация контейнеров
       - Автоматическое масштабирование
       - Самовосстановление сервисов
+    limitations:
+      - Высокая сложность настройки и эксплуатации
+      - Требуются ресурсы инфраструктуры
     constraints:
       - Требует администрирования кластера и инфраструктуры.
     price: free
     documentation:
       - https://kubernetes.io/docs/
     compatibility: [gitlab, github]
+    dependencies: [container-runtime]
+    support:
+      update_frequency: quarterly
+      sla: "community"
+      docs: "https://kubernetes.io/docs/"
     support_status: active
     maturity: recommended
     use_cases:
       - Управление инфраструктурой
       - Микросервисные платформы
+    price: free
     licensing:
       model: open_source
       license: Apache-2.0
@@ -654,17 +896,26 @@ apps:
       - Аналитика трафика
       - Сегментация аудитории
       - Отчеты и дашборды
+    limitations:
+      - Ограниченная выгрузка данных в бесплатной версии
+      - Некоторые функции доступны только в GA360
     constraints:
       - Пороговые лимиты в бесплатной версии.
     price: tiered
     documentation:
       - https://support.google.com/analytics/
     compatibility: [shopify, google-drive]
+    dependencies: [google-workspace]
+    support:
+      update_frequency: monthly
+      sla: "99.9% (GA360)"
+      docs: "https://developers.google.com/analytics"
     support_status: active
     maturity: stable
     use_cases:
       - Аналитика маркетинга
       - Отчетность по трафику
+    price: freemium
     licensing:
       model: freemium
       license: commercial
