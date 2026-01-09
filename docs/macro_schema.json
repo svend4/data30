@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/macro.json",
+  "title": "Macro",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "description",
+    "trigger",
+    "steps",
+    "conditions",
+    "errors",
+    "result"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^macro-[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["string", "number", "boolean", "array", "object"]
+          },
+          "default": {},
+          "required": {
+            "type": "boolean",
+            "default": false
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "required": ["type", "params"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"type": "string"},
+        "params": {"type": "object"}
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "params", "conditions", "on_error"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "params": {"type": "object"},
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "type": {"type": "string"},
+                "params": {"type": "object"}
+              }
+            }
+          },
+          "on_error": {
+            "type": "object",
+            "required": ["strategy"],
+            "additionalProperties": false,
+            "properties": {
+              "strategy": {"type": "string", "enum": ["retry", "skip", "abort", "fallback"]},
+              "retries": {"type": "integer", "minimum": 0},
+              "fallback_step_id": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "params"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {"type": "string"},
+          "params": {"type": "object"}
+        }
+      }
+    },
+    "errors": {
+      "type": "object",
+      "required": ["default_strategy", "notify", "log_level"],
+      "additionalProperties": false,
+      "properties": {
+        "default_strategy": {"type": "string", "enum": ["retry", "skip", "abort"]},
+        "notify": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["email", "slack", "webhook"]}
+        },
+        "log_level": {"type": "string", "enum": ["info", "warn", "error"]}
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"type": "string", "enum": ["success", "partial", "failed"]},
+        "outputs": {"type": "object"}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "owner": {"type": "string"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  }
+}
