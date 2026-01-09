@@ -1,5 +1,52 @@
 openapi: 3.0.3
 info:
+  title: Data30 Service API
+  version: 1.0.0
+  description: REST API for retrieving and managing data30 resources.
+servers:
+  - url: https://api.data30.example.com
+    description: Production
+  - url: https://staging-api.data30.example.com
+    description: Staging
+paths:
+  /health:
+    get:
+      summary: Service health check
+      description: Returns service readiness status.
+      responses:
+        "200":
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /datasets:
+    get:
+      summary: List datasets
+      description: Returns the list of available datasets.
+      responses:
+        "200":
+          description: A list of datasets.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: ds_123
+                    name:
+                      type: string
+                      example: Sample dataset
+    post:
+      summary: Create dataset
+      description: Creates a new dataset definition.
   title: Function Registry API
   version: 1.0.0
   description: |
@@ -244,6 +291,27 @@ paths:
         content:
           application/json:
             schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: New dataset
+      responses:
+        "201":
+          description: Dataset created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ds_456
+                  name:
+                    type: string
+                    example: New dataset
               $ref: '#/components/schemas/Macro'
       responses:
         '201':

@@ -1,0 +1,106 @@
+{
+  "explainable_factors": [
+    {
+      "id": "quality",
+      "label": "Высокое качество",
+      "description": "Стабильные метрики SLA, точность и низкая доля инцидентов."
+    },
+    {
+      "id": "reviews",
+      "label": "Подтвержденные отзывы",
+      "description": "Кейсы и отзывы команд, подтвердившие эффект и удобство."
+    },
+    {
+      "id": "maturity",
+      "label": "Зрелость",
+      "description": "Уровень проверки сценария: MVP, Проверено, Масштабировано."
+    },
+    {
+      "id": "compatibility",
+      "label": "Совместимость",
+      "description": "Совпадение с доступными источниками данных и интеграциями."
+    }
+  ],
+  "templates": [
+    {
+      "id": "quality_score",
+      "title": "Высокое качество",
+      "template": "Качество: {score}/5 по SLA и точности, инциденты ниже {incident_rate}%."
+    },
+    {
+      "id": "reviews_count",
+      "title": "Подтвержденные отзывы",
+      "template": "Отзывы: подтверждено {teams} командами, {cases} кейсов."
+    },
+    {
+      "id": "maturity_level",
+      "title": "Зрелость",
+      "template": "Зрелость: {level}, масштабировано в {rollouts} командах."
+    },
+    {
+      "id": "compatibility",
+      "title": "Совместимость",
+      "template": "Совместимость: доступны {sources} источника данных, интеграции {integrations}."
+    }
+  ],
+  "ui_rules": [
+    {
+      "rule": "Показывать блок 'Почему рекомендовано' при наличии минимум 2 факторов.",
+      "priority": 1
+    },
+    {
+      "rule": "Сортировать факторы по влиянию на итоговый скоринг.",
+      "priority": 2
+    },
+    {
+      "rule": "Ограничивать список до 3 пунктов, остальные скрывать под ссылкой 'Еще причины'.",
+      "priority": 3
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec_ticket_automation",
+      "title": "Автоматизация обработки тикетов",
+      "score": 0.86,
+      "reasons": [
+        {
+          "factor_id": "quality",
+          "template_id": "quality_score",
+          "data": {"score": 4.7, "incident_rate": 2.1}
+        },
+        {
+          "factor_id": "reviews",
+          "template_id": "reviews_count",
+          "data": {"teams": 6, "cases": 18}
+        },
+        {
+          "factor_id": "compatibility",
+          "template_id": "compatibility",
+          "data": {"sources": 3, "integrations": "CRM, SD, почта"}
+        }
+      ]
+    },
+    {
+      "id": "rec_triage",
+      "title": "Классификация обращений по категории",
+      "score": 0.78,
+      "reasons": [
+        {
+          "factor_id": "quality",
+          "template_id": "quality_score",
+          "data": {"score": 4.5, "incident_rate": 3.4}
+        },
+        {
+          "factor_id": "maturity",
+          "template_id": "maturity_level",
+          "data": {"level": "Проверено", "rollouts": 4}
+        },
+        {
+          "factor_id": "compatibility",
+          "template_id": "compatibility",
+          "data": {"sources": 2, "integrations": "Service Desk"}
+        }
+      ]
+    }
+  ]
+}
