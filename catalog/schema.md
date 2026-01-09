@@ -8,6 +8,9 @@
 - `name` — название приложения.
 - `platforms` — список поддерживаемых платформ (web, ios, android, desktop, cli, api).
 - `functions` — ключевые функции (3–7 пунктов).
+- `constraints` — ограничения и лимиты использования (список).
+- `price` — ориентир стоимости (free, trial, paid, tiered, custom).
+- `documentation` — ссылки на официальную документацию (список).
 - `compatibility` — список `id` приложений, с которыми есть проверенная интеграция.
 - `support_status` — статус поддержки (active, limited, deprecated, discontinued).
 - `maturity` — зрелость (Prototype, Stable, Recommended).
