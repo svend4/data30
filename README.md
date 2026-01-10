@@ -468,8 +468,8 @@ Rollback uses **full snapshot** restoration by default:
 - **Сложность интеграций**: количество систем, API и усилий на внедрение/поддержку.
 
 ### Выбранная вертикаль и решение
-- **Вертикаль**: документооборот.
-- **Решение**: фокус на автоматизации согласований и снижении ошибок обработки документов, как наиболее быстрой точке окупаемости при наличии доступных данных и ограниченной сложности интеграций.
+- **Вертикаль**: маркетинг (канонический выбор — [docs/vertical-selection.md](docs/vertical-selection.md)).
+- **Решение**: фокус на росте выручки и удержании через сегментацию, персонализацию и быструю проверку гипотез при доступных источниках данных.
 ## API scope
 This document defines CRUD operations, endpoints, data contracts, and API requirements for:
 
@@ -681,6 +681,8 @@ Resource-specific filters:
 - Backward-incompatible changes require a new major version.
 - Deprecations are announced with `Deprecation` and `Sunset` headers.
 ## 1. Список вертикалей
+
+Приоритетная вертикаль указана в каноническом документе: [docs/vertical-selection.md](docs/vertical-selection.md).
 
 1. Маркетинг
 2. Продажи
